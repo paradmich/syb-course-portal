@@ -31,40 +31,40 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
   return (
     <div className="pt-20">
       {/* ── HERO ── */}
-      <section className="bg-ink text-cream py-16 px-6">
+      <section className="bg-dark text-parchment py-16 px-6">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             {course.badge && (
-              <span className="inline-block bg-gold text-ink text-xs font-medium px-3 py-1 rounded mb-4">
+              <span className="inline-block bg-gold text-maroon text-xs font-medium px-3 py-1 rounded mb-4">
                 {course.badge}
               </span>
             )}
             <p className="section-label mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>
               {isRetreat ? 'Immersive Retreat' : 'Online Course'} · {course.level}
             </p>
-            <h1 className="font-serif text-4xl md:text-5xl font-light text-cream leading-tight mb-4">
+            <h1 className="font-serif text-4xl md:text-5xl font-light text-parchment leading-tight mb-4">
               {course.title}
             </h1>
-            <p className="text-cream/70 text-lg leading-relaxed mb-6">
+            <p className="text-parchment/70 text-lg leading-relaxed mb-6">
               {course.tagline}
             </p>
 
-            <div className="flex flex-wrap gap-6 text-sm text-cream/60 mb-8">
+            <div className="flex flex-wrap gap-6 text-sm text-parchment/60 mb-8">
               <span className="flex items-center gap-2"><Clock size={15} /> {course.duration}</span>
               {!isRetreat && <span className="flex items-center gap-2"><BookOpen size={15} /> {totalLessons} lessons</span>}
               <span className="flex items-center gap-2"><Users size={15} /> {course.students.toLocaleString()} enrolled</span>
               <span className="flex items-center gap-2"><Star size={15} fill="currentColor" className="text-gold" /> 4.9 rating</span>
             </div>
 
-            <p className="text-sm text-cream/50">
-              Taught by <span className="text-cream font-medium">{course.instructor}</span>
+            <p className="text-sm text-parchment/50">
+              Taught by <span className="text-parchment font-medium">{course.instructor}</span>
             </p>
           </div>
 
           {/* Hero image */}
           <div className="relative rounded-lg overflow-hidden shadow-2xl hidden md:block" style={{ aspectRatio: '4/3' }}>
             <Image src={course.image} alt={course.title} fill className="object-cover" />
-            <div className="absolute inset-0 bg-ink/30" />
+            <div className="absolute inset-0 bg-dark/30" />
             {/* Preview play button */}
             {!isRetreat && (
               <div className="absolute inset-0 flex items-center justify-center">
@@ -88,12 +88,12 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
 
           {/* What you'll learn */}
           <section>
-            <h2 className="font-serif text-3xl font-light text-ink mb-6">What you'll learn</h2>
+            <h2 className="font-serif text-3xl font-light text-maroon mb-6">What you'll learn</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {course.outcomes.map((outcome, i) => (
                 <div key={i} className="flex gap-3 items-start">
                   <CheckCircle size={16} className="text-gold mt-0.5 shrink-0" />
-                  <p className="text-sm text-muted leading-relaxed">{outcome}</p>
+                  <p className="text-sm text-stone leading-relaxed">{outcome}</p>
                 </div>
               ))}
             </div>
@@ -101,9 +101,9 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
 
           {/* Description */}
           <section>
-            <h2 className="font-serif text-3xl font-light text-ink mb-4">About this {isRetreat ? 'retreat' : 'course'}</h2>
+            <h2 className="font-serif text-3xl font-light text-maroon mb-4">About this {isRetreat ? 'retreat' : 'course'}</h2>
             {course.longDescription.split('\n\n').map((para, i) => (
-              <p key={i} className="text-muted leading-relaxed mb-4">{para}</p>
+              <p key={i} className="text-stone leading-relaxed mb-4">{para}</p>
             ))}
           </section>
 
@@ -111,18 +111,18 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
           {!isRetreat && course.modules.length > 0 && (
             <section>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-serif text-3xl font-light text-ink">Curriculum</h2>
-                <p className="text-sm text-muted">{course.modules.length} modules · {totalLessons} lessons</p>
+                <h2 className="font-serif text-3xl font-light text-maroon">Curriculum</h2>
+                <p className="text-sm text-stone">{course.modules.length} modules · {totalLessons} lessons</p>
               </div>
 
               <div className="space-y-3">
                 {course.modules.map((module, mi) => (
-                  <details key={mi} className="border border-line rounded-lg overflow-hidden" open={mi === 0}>
+                  <details key={mi} className="border border-border rounded-lg overflow-hidden" open={mi === 0}>
                     <summary className="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-gold-dim transition-colors list-none">
-                      <span className="font-medium text-sm text-ink">{module.title}</span>
+                      <span className="font-medium text-sm text-maroon">{module.title}</span>
                       <div className="flex items-center gap-3">
-                        <span className="text-xs text-muted">{module.lessons.length} lessons</span>
-                        <ChevronDown size={16} className="text-muted" />
+                        <span className="text-xs text-stone">{module.lessons.length} lessons</span>
+                        <ChevronDown size={16} className="text-stone" />
                       </div>
                     </summary>
                     <div className="divide-y divide-line">
@@ -131,13 +131,13 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
                           <div className="shrink-0">
                             {lesson.preview
                               ? <Play size={14} className="text-gold" />
-                              : <Lock size={14} className="text-muted/50" />
+                              : <Lock size={14} className="text-stone/50" />
                             }
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm text-ink truncate">{lesson.title}</p>
+                            <p className="text-sm text-maroon truncate">{lesson.title}</p>
                             {lesson.description && (
-                              <p className="text-xs text-muted truncate mt-0.5">{lesson.description}</p>
+                              <p className="text-xs text-stone truncate mt-0.5">{lesson.description}</p>
                             )}
                           </div>
                           <div className="flex items-center gap-3 shrink-0">
@@ -149,7 +149,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
                                 Preview
                               </Link>
                             )}
-                            <span className="text-xs text-muted">{lesson.duration}</span>
+                            <span className="text-xs text-stone">{lesson.duration}</span>
                           </div>
                         </div>
                       ))}
@@ -161,8 +161,8 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
           )}
 
           {/* Instructor */}
-          <section className="border-t border-line pt-12">
-            <h2 className="font-serif text-3xl font-light text-ink mb-6">Your instructor</h2>
+          <section className="border-t border-border pt-12">
+            <h2 className="font-serif text-3xl font-light text-maroon mb-6">Your instructor</h2>
             <div className="flex gap-5 items-start">
               <div className="relative w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-gold/30">
                 <Image
@@ -172,9 +172,9 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
                 />
               </div>
               <div>
-                <p className="font-medium text-ink mb-1">Michele Parad</p>
-                <p className="text-sm text-muted mb-3">Message Architect · Author · Educator</p>
-                <p className="text-sm text-muted leading-relaxed">
+                <p className="font-medium text-maroon mb-1">Michele Parad</p>
+                <p className="text-sm text-stone mb-3">Message Architect · Author · Educator</p>
+                <p className="text-sm text-stone leading-relaxed">
                   Michele helps established experts find the through-line of their work and build the language, systems, and influence ecosystem to carry it into the world. She is the creator of the S.E.L.L. Framework and author of <em>Sell Your Brilliance</em>.
                 </p>
               </div>
@@ -184,21 +184,21 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
 
         {/* Right: Purchase card (sticky) */}
         <div className="md:col-span-1">
-          <div className="sticky top-24 bg-white border border-line rounded-lg shadow-lg overflow-hidden">
+          <div className="sticky top-24 bg-white border border-border rounded-lg shadow-lg overflow-hidden">
             {/* Course image thumbnail */}
             <div className="relative h-36 overflow-hidden">
               <Image src={course.image} alt={course.title} fill className="object-cover" />
-              <div className="absolute inset-0 bg-ink/40" />
+              <div className="absolute inset-0 bg-dark/40" />
             </div>
 
             <div className="p-6">
               {/* Price */}
               <div className="flex items-baseline gap-3 mb-1">
-                <span className="font-serif text-4xl font-light text-ink">
+                <span className="font-serif text-4xl font-light text-maroon">
                   ${course.price.toLocaleString()}
                 </span>
                 {course.originalPrice && (
-                  <span className="text-muted line-through">${course.originalPrice.toLocaleString()}</span>
+                  <span className="text-stone line-through">${course.originalPrice.toLocaleString()}</span>
                 )}
               </div>
               {course.originalPrice && (
@@ -217,25 +217,25 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
               </Link>
 
               {/* Guarantees */}
-              <div className="space-y-3 pt-4 border-t border-line">
+              <div className="space-y-3 pt-4 border-t border-border">
                 <div className="flex items-start gap-3">
                   <Shield size={14} className="text-gold mt-0.5 shrink-0" />
-                  <p className="text-xs text-muted">30-day money-back guarantee</p>
+                  <p className="text-xs text-stone">30-day money-back guarantee</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <Award size={14} className="text-gold mt-0.5 shrink-0" />
-                  <p className="text-xs text-muted">Certificate of completion</p>
+                  <p className="text-xs text-stone">Certificate of completion</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <Clock size={14} className="text-gold mt-0.5 shrink-0" />
-                  <p className="text-xs text-muted">Lifetime access</p>
+                  <p className="text-xs text-stone">Lifetime access</p>
                 </div>
               </div>
 
               {/* Installment option */}
               {!isRetreat && course.price > 500 && (
-                <div className="mt-4 pt-4 border-t border-line">
-                  <p className="text-xs text-center text-muted mb-2">Or split the investment:</p>
+                <div className="mt-4 pt-4 border-t border-border">
+                  <p className="text-xs text-center text-stone mb-2">Or split the investment:</p>
                   <PurchaseButton
                     course={course}
                     installments
@@ -248,7 +248,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
 
           {/* "Have questions?" */}
           <div className="mt-4 text-center">
-            <p className="text-xs text-muted">
+            <p className="text-xs text-stone">
               Have questions?{' '}
               <a href="mailto:hello@sellyourbrilliance.com" className="text-gold hover:underline">
                 Email us

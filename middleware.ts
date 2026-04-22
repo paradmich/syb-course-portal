@@ -16,9 +16,12 @@ export function middleware(request: NextRequest) {
     request.cookies.get("__Secure-better-auth.session_token")
 
   if (!sessionCookie?.value) {
-    const loginUrl = new URL("/login", request.url)
-    loginUrl.searchParams.set("callbackUrl", pathname)
-    return NextResponse.redirect(loginUrl)
+    // PREVIEW_MODE: skip redirect so screenshots work without a session
+    if (process.env.PREVIEW_MODE !== "1") {
+      const loginUrl = new URL("/login", request.url)
+      loginUrl.searchParams.set("callbackUrl", pathname)
+      return NextResponse.redirect(loginUrl)
+    }
   }
 
   return NextResponse.next()

@@ -6,65 +6,103 @@
 
 @layer base {
   :root {
-    --gold:      #C9973A;
-    --gold-light: #E8C070;
-    --gold-dim:  #F5EDD6;
-    --cream:     #FAFAF7;
-    --ink:       #1A1A1A;
-    --muted:     #6B6B6B;
-    --line:      #E8E8E8;
+    --blush:      #F5E8DC;
+    --maroon:     #2D1510;
+    --dark:       #1C0805;
+    --gold:       #B8882A;
+    --gold-light: #D4A84B;
+    --gold-dim:   #F5EAD8;
+    --parchment:  #E8D0B8;
+    --stone:      #5C3D35;
+    --border:     #E0CFC4;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    @apply bg-cream text-ink font-sans antialiased;
+    background: var(--blush);
+    color: var(--maroon);
+    font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3 {
-    @apply font-serif;
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    color: var(--maroon);
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply inline-flex items-center gap-2 bg-ink text-cream px-6 py-3 text-sm font-medium tracking-wide transition-all duration-200 hover:bg-gold hover:text-ink;
-  }
-
+  /* ── Primary gold button — matches site's "READ THE BOOK →" style ── */
   .btn-gold {
-    @apply inline-flex items-center gap-2 bg-gold text-ink px-6 py-3 text-sm font-medium tracking-wide transition-all duration-200 hover:bg-gold-dark hover:text-cream;
+    @apply inline-flex items-center gap-2 bg-gold text-white px-7 py-3.5
+           text-xs font-medium tracking-[0.18em] uppercase
+           transition-all duration-200 hover:bg-gold-light;
+    border-radius: 2px;
   }
 
+  /* ── Outline button ── */
   .btn-outline {
-    @apply inline-flex items-center gap-2 border border-ink text-ink px-6 py-3 text-sm font-medium tracking-wide transition-all duration-200 hover:bg-ink hover:text-cream;
+    @apply inline-flex items-center gap-2 border border-gold text-gold px-7 py-3.5
+           text-xs font-medium tracking-[0.18em] uppercase
+           transition-all duration-200 hover:bg-gold hover:text-white;
+    border-radius: 2px;
   }
 
-  .section-label {
-    @apply text-xs font-medium tracking-[0.2em] uppercase text-muted;
+  /* ── Dark filled button ── */
+  .btn-dark {
+    @apply inline-flex items-center gap-2 bg-maroon text-blush px-7 py-3.5
+           text-xs font-medium tracking-[0.18em] uppercase
+           transition-all duration-200 hover:bg-dark;
+    border-radius: 2px;
   }
 
+  /* ── Ghost / text button ── */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-gold text-xs font-medium
+           tracking-[0.18em] uppercase transition-colors hover:text-gold-light;
+  }
+
+  /* ── Section eyebrow label — matches "THE BOOK", "WHAT SUCCESS REQUIRES" ── */
+  .eyebrow {
+    @apply text-xs font-medium tracking-[0.18em] uppercase text-gold;
+  }
+
+  /* ── Gold accent line ── */
+  .gold-line {
+    @apply block w-8 h-px bg-gold mb-4;
+  }
+
+  /* ── Input field ── */
+  .field {
+    @apply w-full px-4 py-3 bg-white border border-border text-maroon text-sm
+           focus:outline-none focus:border-gold transition-colors placeholder:text-stone/50;
+    border-radius: 2px;
+  }
+
+  /* ── Card ── */
   .card {
-    @apply bg-white border border-line rounded-lg overflow-hidden transition-shadow duration-200 hover:shadow-md;
+    @apply bg-white border border-border overflow-hidden
+           transition-shadow duration-200 hover:shadow-md;
+    border-radius: 2px;
   }
 
-  .progress-bar {
-    @apply h-1.5 bg-line rounded-full overflow-hidden;
-  }
-
-  .progress-fill {
-    @apply h-full bg-gold rounded-full transition-all duration-500;
-  }
+  /* ── Progress bar ── */
+  .progress-bar  { @apply h-1 bg-border overflow-hidden; border-radius: 1px; }
+  .progress-fill { @apply h-full bg-gold transition-all duration-500; border-radius: 1px; }
 }
 
-/* Lesson player video placeholder */
+/* Lesson player */
 .video-placeholder {
-  background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+  background: var(--dark);
   aspect-ratio: 16/9;
 }
 
-/* Fade animations */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.fade-up { animation: fadeUp 0.5s ease forwards; }
+.fade-up { animation: fadeUp 0.45s ease forwards; }

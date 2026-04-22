@@ -31,10 +31,10 @@ export default function CoursesPage({
         {/* Header */}
         <div className="max-w-2xl mb-14">
           <p className="section-label mb-3">All Programs</p>
-          <h1 className="font-serif text-5xl font-light text-ink leading-tight mb-4">
+          <h1 className="font-serif text-5xl font-light text-maroon leading-tight mb-4">
             Choose your path.
           </h1>
-          <p className="text-muted text-lg leading-relaxed">
+          <p className="text-stone text-lg leading-relaxed">
             Whether you want to find your voice, build your course, or go deep in an immersive retreat — there's a container here for your next evolution.
           </p>
         </div>
@@ -47,8 +47,8 @@ export default function CoursesPage({
               href={cat === 'all' ? '/courses' : `/courses?category=${cat}`}
               className={`px-4 py-2 text-sm font-medium rounded transition-colors ${
                 (cat === 'all' && activeCategory === 'all') || cat === activeCategory
-                  ? 'bg-ink text-cream'
-                  : 'bg-white border border-line text-muted hover:border-ink hover:text-ink'
+                  ? 'bg-dark text-parchment'
+                  : 'bg-white border border-border text-stone hover:border-ink hover:text-maroon'
               }`}
             >
               {cat === 'all' ? 'All Programs' : cat === 'course' ? 'Online Courses' : 'Retreats'}
@@ -61,7 +61,7 @@ export default function CoursesPage({
           <section className="mb-20">
             {activeCategory === 'all' && (
               <div className="flex items-center justify-between mb-8">
-                <h2 className="font-serif text-3xl font-light text-ink">Online Courses</h2>
+                <h2 className="font-serif text-3xl font-light text-maroon">Online Courses</h2>
                 <span className="section-label">{online.length} programs</span>
               </div>
             )}
@@ -79,8 +79,8 @@ export default function CoursesPage({
             {activeCategory === 'all' && (
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className="font-serif text-3xl font-light text-ink">Immersive Retreats</h2>
-                  <p className="text-sm text-muted mt-1">Small group, in-person experiences</p>
+                  <h2 className="font-serif text-3xl font-light text-maroon">Immersive Retreats</h2>
+                  <p className="text-sm text-stone mt-1">Small group, in-person experiences</p>
                 </div>
                 <span className="section-label">{retreats.length} events</span>
               </div>
@@ -94,12 +94,12 @@ export default function CoursesPage({
         )}
 
         {/* Bundle CTA */}
-        <div className="mt-20 bg-ink rounded-lg p-10 md:p-14 text-center">
+        <div className="mt-20 bg-dark rounded-lg p-10 md:p-14 text-center">
           <p className="section-label mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>Not sure where to start?</p>
-          <h3 className="font-serif text-3xl font-light text-cream mb-4">
+          <h3 className="font-serif text-3xl font-light text-parchment mb-4">
             Start with Channel Your Voice.
           </h3>
-          <p className="text-cream/60 mb-8 max-w-md mx-auto">
+          <p className="text-parchment/60 mb-8 max-w-md mx-auto">
             It's the foundation everything else is built on. Most students take it first — and many say it's the most transformative work they've ever done.
           </p>
           <Link href="/courses/channel-your-voice" className="btn-gold">

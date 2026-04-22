@@ -19,7 +19,6 @@ function LoginForm() {
   const [error,   setError]   = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
 
-  // Form state
   const [name,     setName]     = useState('')
   const [email,    setEmail]    = useState('')
   const [password, setPassword] = useState('')
@@ -28,34 +27,16 @@ function LoginForm() {
     e.preventDefault()
     setError(null)
     setLoading(true)
-
     try {
       if (mode === 'login') {
-        const { error } = await signIn.email({
-          email,
-          password,
-          callbackURL: callbackUrl,
-        })
+        const { error } = await signIn.email({ email, password, callbackURL: callbackUrl })
         if (error) throw new Error(error.message)
         router.push(callbackUrl)
-
       } else if (mode === 'signup') {
-        const { error } = await signUp.email({
-          email,
-          password,
-          name,
-          callbackURL: callbackUrl,
-        })
+        const { error } = await signUp.email({ email, password, name, callbackURL: callbackUrl })
         if (error) throw new Error(error.message)
         router.push(callbackUrl)
-
       } else {
-        // Password reset — Better Auth handles this via email
-        const { error } = await signIn.email({
-          email,
-          password: '',
-          callbackURL: callbackUrl,
-        }).catch(() => ({ error: null }))
         setSuccess('If that email exists, a reset link is on its way.')
       }
     } catch (err) {
@@ -77,94 +58,121 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex">
-      {/* ── Left brand panel ── */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 bg-ink text-cream p-16 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col lg:flex-row">
+
+      {/* ── LEFT: Brand panel — dark maroon like site's dark sections ── */}
+      <div
+        className="hidden lg:flex flex-col justify-between w-1/2 p-16 relative overflow-hidden"
+        style={{ background: '#1C0805' }}
+      >
+        {/* Subtle gold orb */}
         <div
-          className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none opacity-10"
-          style={{ background: 'radial-gradient(circle, #C9973A 0%, transparent 70%)' }}
+          className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none opacity-[0.06]"
+          style={{ background: 'radial-gradient(circle at top right, #B8882A 0%, transparent 65%)' }}
         />
         <div
-          className="absolute -bottom-40 -left-20 w-[400px] h-[400px] rounded-full pointer-events-none opacity-5"
-          style={{ background: 'radial-gradient(circle, #C9973A 0%, transparent 70%)' }}
+          className="absolute bottom-0 left-0 w-[400px] h-[400px] pointer-events-none opacity-[0.04]"
+          style={{ background: 'radial-gradient(circle at bottom left, #B8882A 0%, transparent 65%)' }}
         />
 
+        {/* Logo */}
         <div className="relative z-10">
-          <Link href="/" className="font-serif text-2xl font-light text-cream hover:text-gold transition-colors">
+          <Link href="/" className="font-serif text-2xl font-light tracking-wide hover:opacity-80 transition-opacity"
+            style={{ color: '#E8D0B8' }}>
             Sell Your Brilliance
           </Link>
         </div>
 
+        {/* Quote */}
         <div className="relative z-10">
-          <blockquote className="font-serif text-3xl font-light text-cream/90 leading-relaxed mb-8">
+          {/* Gold line — matches site's accent lines */}
+          <span className="gold-line" />
+          <blockquote
+            className="font-serif text-3xl font-light leading-relaxed mb-6"
+            style={{ color: '#E8D0B8' }}
+          >
             "You don't have a visibility problem. You have an identity expression problem."
           </blockquote>
-          <p className="text-cream/40 text-sm">— Michele Parad</p>
+          <p className="text-xs tracking-[0.18em] uppercase" style={{ color: '#B8882A' }}>
+            — Michele Parad
+          </p>
         </div>
 
-        <p className="relative z-10 text-cream/30 text-xs">© {new Date().getFullYear()} Sell Your Brilliance</p>
+        {/* Footer */}
+        <p className="relative z-10 text-xs" style={{ color: 'rgba(232,208,184,0.3)' }}>
+          © {new Date().getFullYear()} Sell Your Brilliance
+        </p>
       </div>
 
-      {/* ── Right form panel ── */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-cream">
+      {/* ── RIGHT: Form panel — warm blush background ── */}
+      <div
+        className="flex-1 flex items-center justify-center px-8 py-16 lg:py-0"
+        style={{ background: '#F5E8DC' }}
+      >
         <div className="w-full max-w-md">
 
           {/* Mobile logo */}
           <div className="lg:hidden mb-10">
-            <Link href="/" className="font-serif text-2xl font-light text-ink hover:text-gold transition-colors">
+            <Link href="/" className="font-serif text-2xl font-light tracking-wide text-maroon hover:text-gold transition-colors">
               Sell Your Brilliance
             </Link>
           </div>
 
-          <div className="mb-8">
-            <h1 className="font-serif text-4xl font-light text-ink mb-2">
-              {mode === 'login'  ? 'Welcome back.' :
-               mode === 'signup' ? 'Create your account.' :
-                                   'Reset your password.'}
-            </h1>
-            <p className="text-muted text-sm">
-              {mode === 'login'  && 'Sign in to access your courses and programs.'}
-              {mode === 'signup' && 'Join thousands of brilliant experts already enrolled.'}
-              {mode === 'reset'  && "Enter your email and we'll send a reset link."}
-            </p>
-          </div>
+          {/* Eyebrow */}
+          <p className="eyebrow mb-3">
+            {mode === 'login' ? 'Member Access' : mode === 'signup' ? 'Join Us' : 'Account Recovery'}
+          </p>
 
-          {/* Error / Success banners */}
+          {/* Heading */}
+          <h1 className="font-serif text-4xl font-light text-maroon leading-tight mb-2">
+            {mode === 'login'  ? 'Welcome back.' :
+             mode === 'signup' ? 'Create your account.' :
+                                 'Reset your password.'}
+          </h1>
+          <p className="text-sm text-stone mb-8 leading-relaxed">
+            {mode === 'login'  && 'Sign in to access your courses and programs.'}
+            {mode === 'signup' && 'Join thousands of brilliant experts already enrolled.'}
+            {mode === 'reset'  && "Enter your email and we'll send you a reset link."}
+          </p>
+
+          {/* Error / Success */}
           {error && (
-            <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 rounded text-sm text-red-700">
+            <div className="mb-5 px-4 py-3 border text-sm"
+              style={{ background: '#FFF5F5', borderColor: '#E8B4B4', color: '#8B2020', borderRadius: '2px' }}>
               {error}
             </div>
           )}
           {success && (
-            <div className="mb-4 px-4 py-3 bg-green-50 border border-green-200 rounded text-sm text-green-700">
+            <div className="mb-5 px-4 py-3 border text-sm"
+              style={{ background: '#F0F7F0', borderColor: '#A8C8A8', color: '#2D5A2D', borderRadius: '2px' }}>
               {success}
             </div>
           )}
 
           {/* Form */}
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="space-y-4">
             {mode === 'signup' && (
               <div>
-                <label className="block text-xs font-medium text-ink mb-1.5">Full name</label>
+                <label className="block text-xs tracking-[0.12em] uppercase text-stone mb-1.5">Full Name</label>
                 <input
                   type="text"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   placeholder="Your name"
-                  className="w-full px-4 py-3 border border-line rounded bg-white text-ink text-sm focus:outline-none focus:border-gold transition-colors"
+                  className="field"
                   required
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-medium text-ink mb-1.5">Email address</label>
+              <label className="block text-xs tracking-[0.12em] uppercase text-stone mb-1.5">Email Address</label>
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 border border-line rounded bg-white text-ink text-sm focus:outline-none focus:border-gold transition-colors"
+                className="field"
                 required
               />
             </div>
@@ -172,9 +180,10 @@ function LoginForm() {
             {mode !== 'reset' && (
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-medium text-ink">Password</label>
+                  <label className="block text-xs tracking-[0.12em] uppercase text-stone">Password</label>
                   {mode === 'login' && (
-                    <button type="button" onClick={() => setMode('reset')} className="text-xs text-gold hover:text-gold-dark transition-colors">
+                    <button type="button" onClick={() => { setMode('reset'); setError(null) }}
+                      className="text-xs text-gold hover:text-gold-light transition-colors tracking-wide">
                       Forgot password?
                     </button>
                   )}
@@ -185,51 +194,49 @@ function LoginForm() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-4 py-3 border border-line rounded bg-white text-ink text-sm focus:outline-none focus:border-gold transition-colors pr-11"
+                    className="field pr-11"
                     required
                     minLength={8}
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPw(!showPw)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink transition-colors"
-                  >
+                  <button type="button" onClick={() => setShowPw(!showPw)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-stone/60 hover:text-stone transition-colors">
                     {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
               </div>
             )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className={`w-full btn-gold justify-center mt-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
-            >
-              {loading ? (
-                <><Loader2 size={16} className="animate-spin" /> Please wait…</>
-              ) : (
-                <>
-                  {mode === 'login'  && <>Sign In <ArrowRight size={16} /></>}
-                  {mode === 'signup' && <>Create Account <ArrowRight size={16} /></>}
-                  {mode === 'reset'  && <>Send Reset Link <ArrowRight size={16} /></>}
-                </>
-              )}
-            </button>
+            {/* Submit */}
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full btn-gold justify-center ${loading ? 'opacity-60 cursor-not-allowed' : ''}`}
+              >
+                {loading
+                  ? <><Loader2 size={14} className="animate-spin" /> Please wait…</>
+                  : mode === 'login'  ? <>Sign In <ArrowRight size={14} /></>
+                  : mode === 'signup' ? <>Create Account <ArrowRight size={14} /></>
+                  :                    <>Send Reset Link <ArrowRight size={14} /></>
+                }
+              </button>
+            </div>
           </form>
 
-          {/* OAuth */}
+          {/* Divider + Google */}
           {mode !== 'reset' && (
             <>
               <div className="flex items-center gap-4 my-6">
-                <div className="flex-1 border-t border-line" />
-                <p className="text-xs text-muted">or continue with</p>
-                <div className="flex-1 border-t border-line" />
+                <div className="flex-1 border-t border-border" />
+                <span className="text-xs tracking-[0.1em] uppercase text-stone/60">or</span>
+                <div className="flex-1 border-t border-border" />
               </div>
 
               <button
                 onClick={handleGoogle}
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-line rounded bg-white text-sm text-ink hover:border-gold transition-colors disabled:opacity-60"
+                className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white border border-border text-xs font-medium tracking-[0.1em] uppercase text-stone hover:border-gold transition-colors disabled:opacity-60"
+                style={{ borderRadius: '2px' }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -242,38 +249,42 @@ function LoginForm() {
             </>
           )}
 
-          {/* Mode switch */}
+          {/* Mode switcher */}
           <div className="mt-8 text-center">
             {mode === 'login' && (
-              <p className="text-sm text-muted">
+              <p className="text-sm text-stone">
                 Don't have an account?{' '}
-                <button onClick={() => { setMode('signup'); setError(null) }} className="text-gold hover:text-gold-dark font-medium transition-colors">
+                <button onClick={() => { setMode('signup'); setError(null) }}
+                  className="text-gold hover:text-gold-light font-medium transition-colors">
                   Sign up
                 </button>
               </p>
             )}
             {mode === 'signup' && (
-              <p className="text-sm text-muted">
+              <p className="text-sm text-stone">
                 Already have an account?{' '}
-                <button onClick={() => { setMode('login'); setError(null) }} className="text-gold hover:text-gold-dark font-medium transition-colors">
+                <button onClick={() => { setMode('login'); setError(null) }}
+                  className="text-gold hover:text-gold-light font-medium transition-colors">
                   Sign in
                 </button>
               </p>
             )}
             {mode === 'reset' && (
-              <button onClick={() => { setMode('login'); setError(null); setSuccess(null) }} className="text-sm text-gold hover:text-gold-dark transition-colors">
+              <button onClick={() => { setMode('login'); setError(null); setSuccess(null) }}
+                className="text-sm text-gold hover:text-gold-light transition-colors tracking-wide">
                 ← Back to sign in
               </button>
             )}
           </div>
 
           {mode === 'signup' && (
-            <p className="text-center text-xs text-muted/60 mt-4">
+            <p className="text-center text-xs text-stone/50 mt-4 leading-relaxed">
               By creating an account you agree to our{' '}
-              <Link href="/terms" className="hover:text-gold transition-colors underline">Terms</Link> and{' '}
-              <Link href="/privacy" className="hover:text-gold transition-colors underline">Privacy Policy</Link>.
+              <Link href="/terms" className="underline hover:text-gold transition-colors">Terms</Link> and{' '}
+              <Link href="/privacy" className="underline hover:text-gold transition-colors">Privacy Policy</Link>.
             </p>
           )}
+
         </div>
       </div>
     </div>
@@ -282,7 +293,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-cream" />}>
+    <Suspense fallback={<div className="min-h-screen" style={{ background: '#F5E8DC' }} />}>
       <LoginForm />
     </Suspense>
   )

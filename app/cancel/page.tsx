@@ -11,16 +11,16 @@ export default function CancelPage({
     : '/courses'
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 bg-cream">
+    <div className="min-h-screen flex items-center justify-center px-6 bg-blush">
       <div className="max-w-md w-full text-center">
         <div className="w-20 h-20 rounded-full bg-line flex items-center justify-center mx-auto mb-6">
-          <XCircle size={40} className="text-muted" />
+          <XCircle size={40} className="text-stone" />
         </div>
 
-        <h1 className="font-serif text-4xl font-light text-ink mb-3">
+        <h1 className="font-serif text-4xl font-light text-maroon mb-3">
           Payment cancelled
         </h1>
-        <p className="text-muted leading-relaxed mb-10">
+        <p className="text-stone leading-relaxed mb-10">
           No worries — you haven't been charged. Your spot is still available whenever you're ready.
         </p>
 

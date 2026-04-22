@@ -20,7 +20,7 @@ export default function DashboardPage() {
         <div className="flex items-start justify-between mb-12">
           <div>
             <p className="section-label mb-2">Welcome back</p>
-            <h1 className="font-serif text-4xl font-light text-ink">
+            <h1 className="font-serif text-4xl font-light text-maroon">
               Your learning journey
             </h1>
           </div>
@@ -36,20 +36,20 @@ export default function DashboardPage() {
             { icon: Clock,    label: 'Hours learned', value: '18h' },
             { icon: Award,    label: 'Completed', value: 0 },
           ].map(({ icon: Icon, label, value }) => (
-            <div key={label} className="bg-white border border-line rounded-lg p-5 text-center">
+            <div key={label} className="bg-white border border-border rounded-lg p-5 text-center">
               <Icon size={20} className="mx-auto mb-2 text-gold" />
-              <p className="font-serif text-3xl font-light text-ink">{value}</p>
-              <p className="text-xs text-muted mt-1">{label}</p>
+              <p className="font-serif text-3xl font-light text-maroon">{value}</p>
+              <p className="text-xs text-stone mt-1">{label}</p>
             </div>
           ))}
         </div>
 
         {/* My Courses */}
         <section className="mb-16">
-          <h2 className="font-serif text-2xl font-light text-ink mb-6">Continue learning</h2>
+          <h2 className="font-serif text-2xl font-light text-maroon mb-6">Continue learning</h2>
           <div className="space-y-4">
             {enrolledCourses.map(({ course, progress, lastLesson, lastModule, enrolledAt }) => (
-              <div key={course.slug} className="bg-white border border-line rounded-lg overflow-hidden flex flex-col md:flex-row">
+              <div key={course.slug} className="bg-white border border-border rounded-lg overflow-hidden flex flex-col md:flex-row">
                 {/* Thumbnail */}
                 <div className="relative w-full md:w-52 h-36 md:h-auto shrink-0">
                   <Image
@@ -58,7 +58,7 @@ export default function DashboardPage() {
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-ink/30 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-dark/30 flex items-center justify-center">
                     <Link
                       href={`/learn/${course.slug}/${lastLesson}`}
                       className="w-11 h-11 rounded-full bg-white/25 border border-white/50 flex items-center justify-center hover:bg-white/40 transition-colors"
@@ -73,9 +73,9 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex items-start justify-between gap-4 mb-2">
                       <div>
-                        <h3 className="font-serif text-xl font-light text-ink">{course.title}</h3>
-                        <p className="text-xs text-muted mt-0.5">
-                          Last watched: <span className="text-ink">{lastModule}</span>
+                        <h3 className="font-serif text-xl font-light text-maroon">{course.title}</h3>
+                        <p className="text-xs text-stone mt-0.5">
+                          Last watched: <span className="text-maroon">{lastModule}</span>
                         </p>
                       </div>
                       <span className="text-sm font-medium text-gold shrink-0">{progress}%</span>
@@ -88,7 +88,7 @@ export default function DashboardPage() {
                       <div className="progress-fill" style={{ width: `${progress}%` }} />
                     </div>
                     <div className="flex items-center justify-between">
-                      <p className="text-xs text-muted">Enrolled {enrolledAt}</p>
+                      <p className="text-xs text-stone">Enrolled {enrolledAt}</p>
                       <Link
                         href={`/learn/${course.slug}/${lastLesson}`}
                         className="text-xs font-medium text-gold hover:text-gold-dark transition-colors flex items-center gap-1"
@@ -107,7 +107,7 @@ export default function DashboardPage() {
         {unenrolled.length > 0 && (
           <section>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="font-serif text-2xl font-light text-ink">Explore more programs</h2>
+              <h2 className="font-serif text-2xl font-light text-maroon">Explore more programs</h2>
               <Link href="/courses" className="text-sm text-gold hover:text-gold-dark transition-colors flex items-center gap-1">
                 View all <ArrowRight size={14} />
               </Link>
@@ -118,7 +118,7 @@ export default function DashboardPage() {
                 <Link
                   key={course.slug}
                   href={`/courses/${course.slug}`}
-                  className="bg-white border border-line rounded-lg overflow-hidden group hover:shadow-md transition-shadow"
+                  className="bg-white border border-border rounded-lg overflow-hidden group hover:shadow-md transition-shadow"
                 >
                   <div className="relative h-36 overflow-hidden">
                     <Image
@@ -128,18 +128,18 @@ export default function DashboardPage() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     {course.badge && (
-                      <span className="absolute top-2 left-2 bg-gold text-ink text-xs font-medium px-2 py-0.5 rounded">
+                      <span className="absolute top-2 left-2 bg-gold text-maroon text-xs font-medium px-2 py-0.5 rounded">
                         {course.badge}
                       </span>
                     )}
                   </div>
                   <div className="p-4">
-                    <h3 className="font-serif text-base font-light text-ink group-hover:text-gold transition-colors leading-snug mb-1">
+                    <h3 className="font-serif text-base font-light text-maroon group-hover:text-gold transition-colors leading-snug mb-1">
                       {course.title}
                     </h3>
-                    <p className="text-xs text-muted mb-3">{course.tagline}</p>
+                    <p className="text-xs text-stone mb-3">{course.tagline}</p>
                     <div className="flex items-center justify-between">
-                      <span className="font-serif text-lg text-ink">${course.price.toLocaleString()}</span>
+                      <span className="font-serif text-lg text-maroon">${course.price.toLocaleString()}</span>
                       <span className="text-xs text-gold">Enroll →</span>
                     </div>
                   </div>

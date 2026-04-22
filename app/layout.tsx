@@ -9,18 +9,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sell Your Brilliance',
     description: 'Courses, retreats, and programs for established experts ready to amplify their impact.',
-    images: ['/og-image.jpg'],
   },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col" style={{ background: '#F5E8DC' }}>
         <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

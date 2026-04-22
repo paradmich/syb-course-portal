@@ -38,7 +38,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-cream">
+      <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-blush">
         {/* Gold orb */}
         <div
           className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full pointer-events-none opacity-20"
@@ -48,10 +48,10 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
             <p className="section-label mb-5">Sell Your Brilliance — with Michele Parad</p>
-            <h1 className="font-serif text-5xl md:text-6xl font-light leading-tight text-ink mb-6">
+            <h1 className="font-serif text-5xl md:text-6xl font-light leading-tight text-maroon mb-6">
               Build the inner architecture that holds your full body of work.
             </h1>
-            <p className="text-muted text-lg leading-relaxed mb-8 max-w-lg">
+            <p className="text-stone text-lg leading-relaxed mb-8 max-w-lg">
               Find your voice. Structure your ideas. Build an ecosystem where everything you know compounds into influence.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -78,23 +78,23 @@ export default function HomePage() {
               <div className="absolute inset-0 ring-1 ring-gold/30 rounded-lg pointer-events-none" />
             </div>
             {/* Floating stat card */}
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-lg p-4 border border-line">
+            <div className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-lg p-4 border border-border">
               <p className="text-2xl font-serif font-light text-gold">2,000+</p>
-              <p className="text-xs text-muted mt-0.5">Brilliant humans enrolled</p>
+              <p className="text-xs text-stone mt-0.5">Brilliant humans enrolled</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── STATS ── */}
-      <section className="border-y border-line bg-white py-10">
+      <section className="border-y border-border bg-white py-10">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map(({ icon: Icon, value, label }) => (
               <div key={label} className="text-center">
                 <Icon size={20} className="mx-auto mb-2 text-gold" />
-                <p className="font-serif text-3xl font-light text-ink">{value}</p>
-                <p className="text-xs text-muted mt-1">{label}</p>
+                <p className="font-serif text-3xl font-light text-maroon">{value}</p>
+                <p className="text-xs text-stone mt-1">{label}</p>
               </div>
             ))}
           </div>
@@ -107,7 +107,7 @@ export default function HomePage() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <p className="section-label mb-3">Programs & Experiences</p>
-              <h2 className="font-serif text-4xl font-light text-ink">
+              <h2 className="font-serif text-4xl font-light text-maroon">
                 Choose your transformation.
               </h2>
             </div>
@@ -131,7 +131,7 @@ export default function HomePage() {
       </section>
 
       {/* ── ABOUT / FOUNDER ── id="about" ── */}
-      <section id="about" className="py-24 px-6 bg-white border-y border-line">
+      <section id="about" className="py-24 px-6 bg-white border-y border-border">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <div className="aspect-square rounded-lg overflow-hidden max-w-md">
@@ -149,16 +149,16 @@ export default function HomePage() {
 
           <div>
             <p className="section-label mb-4">About Michele</p>
-            <h2 className="font-serif text-4xl font-light text-ink leading-snug mb-6">
+            <h2 className="font-serif text-4xl font-light text-maroon leading-snug mb-6">
               Your guide to building a body of work that outlasts any algorithm.
             </h2>
-            <blockquote className="border-l-2 border-gold pl-4 text-muted italic text-lg leading-relaxed mb-6">
+            <blockquote className="border-l-2 border-gold pl-4 text-stone italic text-lg leading-relaxed mb-6">
               "My brain moved across disciplines like a hummingbird in a field of flowers. To me, it felt natural. To everyone else, it looked scattered."
             </blockquote>
-            <p className="text-muted leading-relaxed mb-6">
+            <p className="text-stone leading-relaxed mb-6">
               Michele Parad is a message architect, author, and educator who helps established experts find the through-line of their work and build the language, systems, and influence ecosystem to carry it into the world.
             </p>
-            <p className="text-muted leading-relaxed mb-8">
+            <p className="text-stone leading-relaxed mb-8">
               Through her S.E.L.L. Framework, her courses, retreats, and coaching, she has helped over 2,000 thought leaders claim their voice and build businesses that reflect the full depth of who they are.
             </p>
             <Link href="/courses" className="btn-gold">
@@ -173,27 +173,27 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <p className="section-label mb-3">Student Stories</p>
-            <h2 className="font-serif text-4xl font-light text-ink">
+            <h2 className="font-serif text-4xl font-light text-maroon">
               What happens when you sell your brilliance.
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map(t => (
-              <div key={t.name} className="bg-white border border-line rounded-lg p-6">
+              <div key={t.name} className="bg-white border border-border rounded-lg p-6">
                 <div className="flex gap-0.5 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={14} fill="#C9973A" className="text-gold" />
                   ))}
                 </div>
-                <p className="text-muted leading-relaxed text-sm mb-6 italic">"{t.quote}"</p>
+                <p className="text-stone leading-relaxed text-sm mb-6 italic">"{t.quote}"</p>
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-full bg-gold-dim flex items-center justify-center text-xs font-medium text-gold-dark">
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-ink">{t.name}</p>
-                    <p className="text-xs text-muted">{t.title}</p>
+                    <p className="text-sm font-medium text-maroon">{t.name}</p>
+                    <p className="text-xs text-stone">{t.title}</p>
                   </div>
                 </div>
               </div>
@@ -203,14 +203,14 @@ export default function HomePage() {
       </section>
 
       {/* ── BOOK SECTION ── id="book" ── */}
-      <section id="book" className="py-24 px-6 bg-ink text-cream">
+      <section id="book" className="py-24 px-6 bg-dark text-parchment">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
             <p className="section-label mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>The Book</p>
-            <h2 className="font-serif text-4xl font-light text-cream leading-snug mb-6">
+            <h2 className="font-serif text-4xl font-light text-parchment leading-snug mb-6">
               Read the book that started the movement.
             </h2>
-            <p className="text-cream/60 leading-relaxed mb-8">
+            <p className="text-parchment/60 leading-relaxed mb-8">
               <em>Sell Your Brilliance</em> is the foundational text for experts who want to stop playing small and start building the body of work they were born to create. Available everywhere books are sold.
             </p>
             <Link href="#" className="btn-gold">
@@ -231,10 +231,10 @@ export default function HomePage() {
       <section className="py-20 px-6 bg-gold-dim border-y border-gold/20">
         <div className="max-w-3xl mx-auto text-center">
           <p className="section-label mb-4">Ready to Begin?</p>
-          <h2 className="font-serif text-4xl font-light text-ink mb-6">
+          <h2 className="font-serif text-4xl font-light text-maroon mb-6">
             You don't have a visibility problem.<br />You have an identity expression problem.
           </h2>
-          <p className="text-muted mb-8">Let's fix that together.</p>
+          <p className="text-stone mb-8">Let's fix that together.</p>
           <Link href="/courses" className="btn-primary">
             Explore All Programs <ArrowRight size={16} />
           </Link>
