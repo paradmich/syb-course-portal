@@ -1,10 +1,17 @@
 import { betterAuth } from "better-auth"
 import { Pool } from "pg"
 
+const appUrl = process.env.BETTER_AUTH_URL || "http://localhost:3000"
+
 export const auth = betterAuth({
+  baseURL: appUrl,
+  trustedOrigins: [appUrl],
+
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }, // required for Supabase
+    ssl: process.env.DATABASE_URL?.includes("supabase")
+      ? { rejectUnauthorized: false }
+      : false,
   }),
 
   emailAndPassword: {
@@ -21,11 +28,11 @@ export const auth = betterAuth({
   },
 
   session: {
-    expiresIn:          60 * 60 * 24 * 7,   // 7 days
-    updateAge:          60 * 60 * 24,        // refresh if > 1 day old
+    expiresIn:          60 * 60 * 24 * 7,
+    updateAge:          60 * 60 * 24,
     cookieCache: {
       enabled: true,
-      maxAge:  60 * 5,                       // re-validate every 5 min
+      maxAge:  60 * 5,
     },
   },
 
