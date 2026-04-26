@@ -1,27 +1,11 @@
 import { betterAuth } from "better-auth"
-import Database from "better-sqlite3"
-import path from "path"
-
-/**
- * Better Auth — server instance
- *
- * Local dev:  SQLite file (db.sqlite in project root)
- * Production: swap `database` for a Postgres pool:
- *
- *   import { Pool } from "pg"
- *   database: new Pool({ connectionString: process.env.DATABASE_URL })
- *
- * Then re-run: npx @better-auth/cli generate
- */
-
-// On Vercel, the app root is read-only at runtime; use /tmp instead.
-// Locally, keep the db next to the project root so it persists across restarts.
-const dbPath = process.env.VERCEL
-  ? path.join("/tmp", "db.sqlite")
-  : path.join(process.cwd(), "db.sqlite")
+import { Pool } from "pg"
 
 export const auth = betterAuth({
-  database: new Database(dbPath),
+  database: new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }, // required for Supabase
+  }),
 
   emailAndPassword: {
     enabled: true,
@@ -47,10 +31,9 @@ export const auth = betterAuth({
 
   user: {
     additionalFields: {
-      // Track which courses the user has purchased
       purchasedCourses: {
         type:         "string",
-        defaultValue: "[]",    // JSON array of course slugs
+        defaultValue: "[]",
         input:        false,
       },
     },
