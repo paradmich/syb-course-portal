@@ -258,7 +258,7 @@ export function getCourse(slug: string): Course | undefined {
 }
 
 export function getFeaturedCourses(): Course[] {
-  return courses.filter(c => c.featured)
+  return courses.filter(c => c.featured && c.category === 'course')
 }
 
 export function getCoursesByCategory(category: 'course' | 'retreat'): Course[] {
