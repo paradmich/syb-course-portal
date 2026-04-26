@@ -31,11 +31,11 @@ function LoginForm() {
       if (mode === 'login') {
         const { error } = await signIn.email({ email, password, callbackURL: callbackUrl })
         if (error) throw new Error(error.message)
-        router.push(callbackUrl)
+        window.location.href = callbackUrl
       } else if (mode === 'signup') {
         const { error } = await signUp.email({ email, password, name, callbackURL: callbackUrl })
         if (error) throw new Error(error.message)
-        router.push(callbackUrl)
+        window.location.href = callbackUrl
       } else {
         setSuccess('If that email exists, a reset link is on its way.')
       }
