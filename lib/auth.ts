@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth"
 import Database from "better-sqlite3"
+import path from "path"
 
 /**
  * Better Auth — server instance
@@ -12,8 +13,15 @@ import Database from "better-sqlite3"
  *
  * Then re-run: npx @better-auth/cli generate
  */
+
+// On Vercel, the app root is read-only at runtime; use /tmp instead.
+// Locally, keep the db next to the project root so it persists across restarts.
+const dbPath = process.env.VERCEL
+  ? path.join("/tmp", "db.sqlite")
+  : path.join(process.cwd(), "db.sqlite")
+
 export const auth = betterAuth({
-  database: new Database("./db.sqlite"),
+  database: new Database(dbPath),
 
   emailAndPassword: {
     enabled: true,
