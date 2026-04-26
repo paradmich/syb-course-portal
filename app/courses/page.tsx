@@ -1,17 +1,22 @@
 import { courses } from '@/lib/courses'
+import { auth } from '@/lib/auth'
 import CourseCard from '@/components/CourseCard'
-import { ArrowRight, Lock } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { headers } from 'next/headers'
 
 export const metadata = {
   title: 'My Courses — Sell Your Brilliance',
   description: 'Your learning library. Access enrolled courses and discover new ones.',
 }
 
-// In production this comes from the session/DB. Mocked here for now.
-const enrolledSlugs = ['channel-your-speaking-voice']
+export default async function CoursesPage() {
+  // Read the logged-in user's purchased courses from the session
+  const session = await auth.api.getSession({ headers: headers() }).catch(() => null)
+  const purchased: string[] = JSON.parse(
+    (session?.user as any)?.purchasedCourses || '[]'
+  )
 
-export default function CoursesPage() {
   const allCourses = courses.filter(c => c.category === 'course')
 
   return (
@@ -32,7 +37,7 @@ export default function CoursesPage() {
         {/* Course grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {allCourses.map(course => {
-            const enrolled = enrolledSlugs.includes(course.slug)
+            const enrolled = purchased.includes(course.slug)
             return enrolled
               ? <CourseCard key={course.slug} course={course} enrolled />
               : <CourseCard key={course.slug} course={course} locked />
