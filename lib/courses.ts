@@ -36,16 +36,15 @@ export type Course = {
 
 export const courses: Course[] = [
   {
-    slug: 'channel-your-voice',
-    title: 'Channel Your Voice & Message',
-    tagline: 'Find the words that make you unforgettable.',
-    description: 'Clarify your unique voice, craft your signature message, and build the language ecosystem that makes your work instantly recognizable.',
-    longDescription: `Most experts struggle to articulate what makes them different — not because they lack depth, but because they've never been given the right framework to excavate it. This course is the excavation.
+    slug: 'channel-your-speaking-voice',
+    title: 'Channel Your Speaking Voice',
+    tagline: 'Activate the voice that commands a room and a movement.',
+    description: 'Uncover and own your spoken voice — the tone, presence, and delivery that makes people stop, listen, and remember every word you say.',
+    longDescription: `Your speaking voice is more than how you sound. It's the energetic signature you carry into every room, every stage, every conversation. This course helps you excavate it, own it, and amplify it.
 
-You'll emerge with a crystal-clear voice, a signature message that magnetizes your ideal clients, and a language system you can pull from for every piece of content, every pitch, and every conversation.`,
-    price: 497,
-    originalPrice: 697,
-    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_CHANNEL_VOICE,  // e.g. price_1ABC...
+You'll leave with a fully activated speaking voice, a clear point of view you can articulate in seconds, and the presence to hold any room — from a podcast mic to a stadium stage.`,
+    price: 297,
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_SPEAKING_VOICE,
     category: 'course',
     badge: 'Most Popular',
     image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
@@ -57,10 +56,10 @@ You'll emerge with a crystal-clear voice, a signature message that magnetizes yo
     featured: true,
     outcomes: [
       'Articulate your unique point of view with clarity and confidence',
-      'Write a signature bio that stops people in their tracks',
-      'Build a personal vocabulary that makes your brand unmistakable',
-      'Create messaging pillars for every platform and format',
-      'Develop your S.E.L.L. framework positioning statement',
+      'Own your vocal presence in any setting — podcast, stage, or Zoom',
+      'Build a personal speaking vocabulary that makes your brand unmistakable',
+      'Develop your signature story and the framework that carries it',
+      'Activate your S.E.L.L. positioning in spoken form',
     ],
     modules: [
       {
@@ -73,125 +72,125 @@ You'll emerge with a crystal-clear voice, a signature message that magnetizes yo
         ],
       },
       {
-        title: 'Module 2 — Signature Message Architecture',
+        title: 'Module 2 — Voice Architecture',
         lessons: [
-          { slug: 'message-anatomy', title: 'Anatomy of a Magnetic Message', duration: '25 min', preview: false, description: 'Deconstruct what makes messages stick and spread.' },
-          { slug: 'sell-framework', title: 'The S.E.L.L. Framework Deep Dive', duration: '35 min', preview: false, description: 'Apply the four-part framework to your own work.' },
-          { slug: 'positioning-statement', title: 'Craft Your Positioning Statement', duration: '20 min', preview: false, description: 'Write the one sentence that encapsulates your entire brand.' },
-          { slug: 'message-testing', title: 'Message Testing & Refinement', duration: '15 min', preview: false, description: 'Real-world methods to pressure-test your message.' },
+          { slug: 'message-anatomy', title: 'Anatomy of a Magnetic Message', duration: '25 min', preview: false, description: 'Deconstruct what makes spoken messages land and stick.' },
+          { slug: 'sell-framework', title: 'The S.E.L.L. Framework Deep Dive', duration: '35 min', preview: false, description: 'Apply the four-part framework to your spoken voice.' },
+          { slug: 'positioning-statement', title: 'Craft Your Positioning Statement', duration: '20 min', preview: false, description: 'Write — then speak — the one sentence that encapsulates your brand.' },
+          { slug: 'message-testing', title: 'Message Testing & Refinement', duration: '15 min', preview: false, description: 'Real-world methods to pressure-test your spoken message.' },
         ],
       },
       {
-        title: 'Module 3 — Voice Activation',
+        title: 'Module 3 — Presence & Activation',
         lessons: [
           { slug: 'voice-vs-tone', title: 'Voice vs. Tone: Knowing the Difference', duration: '18 min', preview: false, description: 'Understand how to adapt tone without losing your voice.' },
           { slug: 'language-ecosystem', title: 'Building Your Language Ecosystem', duration: '28 min', preview: false, description: 'Create a personal dictionary of phrases, metaphors, and story seeds.' },
-          { slug: 'platform-translation', title: 'Platform Translation Guide', duration: '22 min', preview: false, description: 'How your voice adapts from email to stage to social.' },
+          { slug: 'platform-translation', title: 'Speaking Across Platforms', duration: '22 min', preview: false, description: 'How your voice adapts from podcast to stage to sales call.' },
         ],
       },
     ],
   },
   {
-    slug: 'build-your-signature-course',
-    title: 'Build Your Signature Course',
-    tagline: 'Turn your expertise into a scalable course that sells while you sleep.',
-    description: 'Design, build, and launch a premium course that packages your knowledge into a transformative learning experience your students rave about.',
-    longDescription: `You have knowledge worth sharing — but knowledge alone doesn't make a course sell. This program walks you through the complete system for creating a premium online course: from curriculum architecture to launch strategy.
+    slug: 'channel-your-writing-voice',
+    title: 'Channel Your Writing Voice',
+    tagline: 'Write with the authority and distinctiveness that makes your words impossible to ignore.',
+    description: 'Find and fully inhabit your written voice — the one that sounds unmistakably like you and draws readers into your world from the very first sentence.',
+    longDescription: `Most experts write the way they think they're supposed to write — formal, careful, hedged. This course helps you break that pattern and find the written voice that is entirely, unapologetically yours.
 
-No more guessing what to include or how to structure it. You'll leave with a fully built course and a launch plan ready to execute.`,
-    price: 997,
-    originalPrice: 1297,
-    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_SIGNATURE_COURSE,
+You'll leave with a writing voice that is clear, magnetic, and consistent across every format: emails, essays, social posts, book chapters, and sales pages.`,
+    price: 197,
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_WRITING_VOICE,
     category: 'course',
     badge: 'New',
     image: 'https://images.unsplash.com/photo-1587691592099-24045742c181?w=800&q=80',
     instructor: 'Michele Parad',
-    duration: '10 weeks',
+    duration: '6 weeks',
     students: 628,
-    lessons: 48,
-    level: 'Intermediate',
+    lessons: 28,
+    level: 'All Levels',
     featured: true,
     outcomes: [
-      'Design a curriculum that delivers real transformation (not just information)',
-      'Record professional-quality video without expensive gear',
-      'Build your course on the right platform for your audience',
-      'Price your course with confidence',
-      'Launch with a proven 30-day sequence that generates momentum',
+      'Write in a voice that is unmistakably yours across every format',
+      'Develop a signature writing style your readers recognize instantly',
+      'Craft emails, essays, and posts that convert without feeling salesy',
+      'Build a personal writing ritual that keeps the words flowing',
+      'Translate your speaking voice into the written word',
     ],
     modules: [
       {
-        title: 'Module 1 — Curriculum Architecture',
+        title: 'Module 1 — Excavating Your Writing Voice',
         lessons: [
-          { slug: 'course-welcome', title: 'Welcome & Your Roadmap', duration: '10 min', preview: true, description: 'Your complete journey from idea to launched course.' },
-          { slug: 'transformation-vs-information', title: 'Transformation vs. Information', duration: '28 min', preview: true, description: 'The mindset shift that separates mediocre courses from bestsellers.' },
-          { slug: 'learning-outcomes', title: 'Defining Powerful Learning Outcomes', duration: '22 min', preview: false, description: 'How to write outcomes that sell the course before students even enroll.' },
-          { slug: 'module-mapping', title: 'Module Mapping Workshop', duration: '40 min', preview: false, description: 'Build your complete module and lesson structure.' },
+          { slug: 'writing-welcome', title: 'Welcome & Your Writing Journey', duration: '10 min', preview: true, description: 'What it means to have a writing voice and how we find yours.' },
+          { slug: 'voice-archaeology', title: 'Voice Archaeology', duration: '28 min', preview: true, description: 'Excavate the influences, rhythms, and instincts that shape your natural voice.' },
+          { slug: 'permission-to-sound-like-you', title: 'Permission to Sound Like You', duration: '22 min', preview: false, description: 'Release the "professional writing" mask and write like the person you actually are.' },
         ],
       },
       {
-        title: 'Module 2 — Content Creation',
+        title: 'Module 2 — Writing With Authority',
         lessons: [
-          { slug: 'video-without-fear', title: 'Video Without Fear', duration: '25 min', preview: false, description: 'Simple setups that look professional on any budget.' },
-          { slug: 'script-vs-outline', title: 'Script vs. Outline: Finding Your Style', duration: '15 min', preview: false, description: 'How to be authentic on camera while staying on point.' },
-          { slug: 'workbook-design', title: 'Designing Companion Workbooks', duration: '20 min', preview: false, description: 'The assets that make your course sticky and refund-proof.' },
+          { slug: 'sentence-level-voice', title: 'Sentence-Level Voice Work', duration: '30 min', preview: false, description: 'The micro-decisions — rhythm, word choice, punctuation — that make a voice distinct.' },
+          { slug: 'structure-and-flow', title: 'Structure & Flow', duration: '25 min', preview: false, description: 'How to organize ideas so they build, land, and resonate.' },
+          { slug: 'writing-for-formats', title: 'Writing Across Formats', duration: '20 min', preview: false, description: 'Email, essay, social, long-form — the same voice, different containers.' },
         ],
       },
       {
-        title: 'Module 3 — Platform & Tech',
+        title: 'Module 3 — The Writing Practice',
         lessons: [
-          { slug: 'platform-comparison', title: 'Platform Comparison Guide', duration: '30 min', preview: false, description: 'Kajabi vs. Teachable vs. Podia vs. building your own.' },
-          { slug: 'pricing-strategy', title: 'Pricing Strategy Deep Dive', duration: '25 min', preview: false, description: 'How to price for value, not time.' },
-        ],
-      },
-      {
-        title: 'Module 4 — Launch',
-        lessons: [
-          { slug: 'launch-sequence', title: 'The 30-Day Launch Sequence', duration: '35 min', preview: false, description: 'A day-by-day plan for your course launch.' },
-          { slug: 'sales-page-masterclass', title: 'Sales Page Masterclass', duration: '40 min', preview: false, description: 'Write every section of your sales page with fill-in-the-blank templates.' },
+          { slug: 'ritual-and-rhythm', title: 'Ritual & Rhythm', duration: '18 min', preview: false, description: 'Build the conditions that make writing feel natural and sustainable.' },
+          { slug: 'editing-your-voice', title: 'Editing Without Erasing Yourself', duration: '22 min', preview: false, description: 'How to polish your writing without scrubbing out what makes it yours.' },
         ],
       },
     ],
   },
   {
-    slug: 'build-your-virtual-summit',
-    title: 'Build Your Virtual Summit',
-    tagline: 'Host a summit that grows your list, builds authority, and generates revenue.',
-    description: 'The complete playbook for producing a high-impact virtual summit — from speaker sourcing to tech stack to post-summit monetization.',
-    longDescription: `A well-run virtual summit is the fastest way to 10x your email list, build relationships with top experts in your space, and establish yourself as a category leader — all at once.
+    slug: 'syb-book-companion-transmissions',
+    title: 'Sell Your Brilliance Book Companion Transmissions',
+    tagline: 'Go deeper into the book — lesson by lesson, transmission by transmission.',
+    description: 'A series of intimate audio and video transmissions that bring the Sell Your Brilliance book to life, with guided exercises, expanded teachings, and direct access to Michele.',
+    longDescription: `The book gave you the map. These transmissions walk you through the territory.
 
-This course teaches you everything: the strategy, the logistics, the tech, and the revenue model that makes summits one of the highest-ROI events you can run.`,
-    price: 797,
-    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_VIRTUAL_SUMMIT,
+Each session goes deeper into a chapter of Sell Your Brilliance — expanding the concepts, guiding you through the exercises, and offering Michele's direct teaching on what it actually takes to apply the framework to your life and work.
+
+This is the book, activated.`,
+    price: 297,
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_BOOK_COMPANION,
     category: 'course',
     image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80',
     instructor: 'Michele Parad',
-    duration: '8 weeks',
+    duration: 'Self-paced',
     students: 312,
-    lessons: 38,
-    level: 'Advanced',
-    featured: false,
+    lessons: 24,
+    level: 'All Levels',
+    featured: true,
     outcomes: [
-      'Plan and produce a 3–5 day virtual summit from scratch',
-      'Recruit A-list speakers who actually show up',
-      'Build a summit tech stack for under $100/month',
-      'Generate revenue before the summit even starts',
-      'Convert summit attendees into course buyers',
+      'Fully integrate the S.E.L.L. framework into your daily work',
+      'Complete every exercise in the book with guided support',
+      'Hear Michele\'s expanded teaching behind each chapter',
+      'Leave with a completed brilliance map you can act on immediately',
+      'Access a community of readers doing the work alongside you',
     ],
     modules: [
       {
-        title: 'Module 1 — Summit Strategy',
+        title: 'Part 1 — See Your Brilliance',
         lessons: [
-          { slug: 'summit-overview', title: 'The Summit Opportunity', duration: '20 min', preview: true, description: 'Why summits work and how to pick the right format for your goals.' },
-          { slug: 'summit-theme', title: 'Choosing Your Summit Theme', duration: '18 min', preview: false, description: 'Pick a theme that attracts speakers and converts attendees.' },
-          { slug: 'revenue-model', title: 'Summit Revenue Models', duration: '25 min', preview: false, description: 'All-access passes, sponsorships, backend offers — pick your mix.' },
+          { slug: 'transmission-welcome', title: 'Welcome Transmission', duration: '12 min', preview: true, description: 'An orientation to how these transmissions work and how to use them with the book.' },
+          { slug: 'chapter-1-transmission', title: 'Chapter 1: The Hummingbird Brain', duration: '28 min', preview: true, description: 'Expanded teaching on why your cross-disciplinary mind is an asset, not a liability.' },
+          { slug: 'chapter-2-transmission', title: 'Chapter 2: Excavating Your Brilliance', duration: '35 min', preview: false, description: 'Guided excavation exercise with Michele walking you through each step.' },
         ],
       },
       {
-        title: 'Module 2 — Speaker & Logistics',
+        title: 'Part 2 — Express Your Brilliance',
         lessons: [
-          { slug: 'speaker-outreach', title: 'Speaker Outreach Templates', duration: '22 min', preview: false, description: 'The exact emails that get a 60%+ acceptance rate.' },
-          { slug: 'interview-framework', title: 'Interview Framework', duration: '28 min', preview: false, description: 'How to run interviews that produce shareable, valuable content.' },
-          { slug: 'tech-stack', title: 'Summit Tech Stack Guide', duration: '30 min', preview: false, description: 'The exact tools to run a professional summit on a lean budget.' },
+          { slug: 'chapter-3-transmission', title: 'Chapter 3: The S.E.L.L. Framework', duration: '40 min', preview: false, description: 'Deep dive into all four parts of the framework with real examples.' },
+          { slug: 'chapter-4-transmission', title: 'Chapter 4: Your Signature Message', duration: '32 min', preview: false, description: 'How to craft and test your signature message in real time.' },
+          { slug: 'chapter-5-transmission', title: 'Chapter 5: Voice Activation', duration: '28 min', preview: false, description: 'Bringing your speaking and writing voice into alignment.' },
+        ],
+      },
+      {
+        title: 'Part 3 — Sell Your Brilliance',
+        lessons: [
+          { slug: 'chapter-6-transmission', title: 'Chapter 6: Building Your Ecosystem', duration: '30 min', preview: false, description: 'How everything you\'ve built connects into a coherent influence system.' },
+          { slug: 'chapter-7-transmission', title: 'Chapter 7: The Long Game', duration: '25 min', preview: false, description: 'On legacy, sustainability, and why your brilliance compounds over time.' },
         ],
       },
     ],
@@ -269,17 +268,17 @@ export function getCoursesByCategory(category: 'course' | 'retreat'): Course[] {
 // Mock enrolled courses for dashboard
 export const enrolledCourses = [
   {
-    course: courses[0], // Channel Your Voice
+    course: courses[0], // Channel Your Speaking Voice
     progress: 68,
     lastLesson: 'message-anatomy',
-    lastModule: 'Module 2 — Signature Message Architecture',
+    lastModule: 'Module 2 — Voice Architecture',
     enrolledAt: '2024-11-15',
   },
   {
-    course: courses[1], // Build Your Signature Course
+    course: courses[2], // SYB Book Companion Transmissions
     progress: 22,
-    lastLesson: 'transformation-vs-information',
-    lastModule: 'Module 1 — Curriculum Architecture',
+    lastLesson: 'chapter-2-transmission',
+    lastModule: 'Part 1 — See Your Brilliance',
     enrolledAt: '2025-01-08',
   },
 ]

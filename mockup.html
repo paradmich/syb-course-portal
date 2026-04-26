@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sell Your Brilliance — Course Portal Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── Brand tokens ── */
+:root {
+  --blush:      #F5E8DC;
+  --blush-deep: #EDD9C8;
+  --maroon:     #2D1510;
+  --dark:       #1C0805;
+  --dark-2:     #2A0D08;
+  --gold:       #B8882A;
+  --gold-l:     #D4A84B;
+  --gold-dim:   #F5EAD8;
+  --parchment:  #E8D0B8;
+  --stone:      #5C3D35;
+  --border:     #E0CFC4;
+  --white:      #FFFFFF;
+  --serif:      'Cormorant Garamond', Georgia, serif;
+  --sans:       'DM Sans', system-ui, sans-serif;
+}
+
+body { background: var(--blush); color: var(--maroon); font-family: var(--sans); font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ── Page switcher ── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── Mockup nav bar ── */
+.mockup-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  background: var(--dark); padding: 10px 20px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.mockup-bar span { color: var(--gold); font-size: 11px; font-family: var(--sans); letter-spacing: .12em; text-transform: uppercase; margin-right: 8px; }
+.mockup-btn {
+  background: transparent; border: 1px solid rgba(184,136,42,.35); color: var(--parchment);
+  font-family: var(--sans); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 14px; cursor: pointer; transition: all .2s; border-radius: 2px;
+}
+.mockup-btn:hover { background: rgba(184,136,42,.15); border-color: var(--gold); }
+.mockup-btn.active { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+.page-wrap { padding-top: 44px; }
+
+/* ── Shared components ── */
+.eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.gold-line { width: 32px; height: 1px; background: var(--gold); display: block; margin-bottom: 16px; }
+h1,h2,h3,h4 { font-family: var(--serif); font-weight: 300; color: var(--maroon); }
+
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: var(--white);
+  font-family: var(--sans); font-size: 11px; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: 13px 28px; border: none; cursor: pointer;
+  border-radius: 2px; transition: background .2s;
+}
+.btn-gold:hover { background: var(--gold-l); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--gold);
+  font-family: var(--sans); font-size: 11px; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: 12px 28px; border: 1px solid var(--gold); cursor: pointer;
+  border-radius: 2px; transition: all .2s;
+}
+.btn-outline:hover { background: var(--gold); color: var(--white); }
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--maroon); color: var(--parchment);
+  font-family: var(--sans); font-size: 11px; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: 13px 28px; border: none; cursor: pointer;
+  border-radius: 2px; transition: background .2s;
+}
+
+.field {
+  width: 100%; padding: 12px 16px;
+  background: var(--white); border: 1px solid var(--border);
+  font-family: var(--sans); font-size: 14px; color: var(--maroon);
+  border-radius: 2px; outline: none; transition: border-color .2s;
+}
+.field:focus { border-color: var(--gold); }
+.field::placeholder { color: rgba(92,61,53,.4); }
+
+.field-label { display: block; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--stone); margin-bottom: 6px; }
+
+/* ── Site Navbar ── */
+.site-nav {
+  position: sticky; top: 44px; z-index: 100;
+  background: rgba(245,232,220,.95); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 64px;
+}
+.site-nav .logo { font-family: var(--serif); font-size: 20px; font-weight: 300; letter-spacing: .04em; color: var(--maroon); }
+.site-nav .nav-links { display: flex; align-items: center; gap: 32px; }
+.site-nav .nav-links a { font-size: 10px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: rgba(45,21,16,.65); transition: color .2s; }
+.site-nav .nav-links a:hover { color: var(--gold); }
+.site-nav .nav-right { display: flex; align-items: center; gap: 16px; }
+.site-nav .nav-right .sign-in { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(45,21,16,.5); }
+
+
+/* ════════════════════════════════════════
+   LOGIN PAGE
+════════════════════════════════════════ */
+.login-wrap { display: flex; min-height: calc(100vh - 44px); }
+
+.login-left {
+  width: 44%; background: var(--dark);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 56px; position: relative; overflow: hidden;
+}
+.login-left::before {
+  content: ''; position: absolute; top: -120px; right: -120px;
+  width: 480px; height: 480px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,136,42,.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.login-left::after {
+  content: ''; position: absolute; bottom: -80px; left: -60px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,136,42,.05) 0%, transparent 65%);
+  pointer-events: none;
+}
+.login-left .ll-logo { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--parchment); position: relative; z-index: 1; }
+
+/* Testimonial panel */
+.ll-testimonial { position: relative; z-index: 1; }
+.ll-stars { display: flex; gap: 4px; margin-bottom: 24px; }
+.ll-stars span { color: var(--gold); font-size: 14px; }
+.ll-testimonial blockquote {
+  font-family: var(--serif); font-size: 24px; font-weight: 300;
+  line-height: 1.6; color: rgba(232,208,184,.9);
+  margin-bottom: 32px; font-style: italic;
+}
+.ll-author { display: flex; align-items: center; gap: 14px; }
+.ll-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(184,136,42,.18); border: 1px solid rgba(184,136,42,.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500; color: var(--gold);
+  letter-spacing: .04em; flex-shrink: 0;
+}
+.ll-author-info .ll-name { font-size: 13px; color: var(--parchment); font-weight: 500; margin-bottom: 2px; }
+.ll-author-info .ll-role { font-size: 11px; color: rgba(232,208,184,.4); letter-spacing: .05em; }
+.ll-course-tag {
+  margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px; border: 1px solid rgba(184,136,42,.2);
+  border-radius: 2px;
+}
+.ll-course-tag .tag-label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: rgba(232,208,184,.35); }
+.ll-course-tag .tag-course { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+
+.login-left .ll-footer { font-size: 11px; color: rgba(232,208,184,.25); position: relative; z-index: 1; }
+
+.login-right {
+  flex: 1; background: var(--blush);
+  display: flex; align-items: center; justify-content: center;
+  padding: 64px 48px;
+}
+.login-form-wrap { width: 100%; max-width: 420px; }
+.login-form-wrap .eyebrow { margin-bottom: 10px; }
+.login-form-wrap h1 { font-size: 40px; font-weight: 300; margin-bottom: 6px; line-height: 1.15; }
+.login-form-wrap .subtitle { font-size: 14px; color: var(--stone); margin-bottom: 32px; }
+.form-group { margin-bottom: 18px; }
+.form-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.forgot { font-size: 11px; color: var(--gold); letter-spacing: .04em; cursor: pointer; }
+.form-submit { margin-top: 8px; }
+.form-submit .btn-gold { width: 100%; justify-content: center; }
+.divider { display: flex; align-items: center; gap: 16px; margin: 24px 0; }
+.divider span { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(92,61,53,.5); }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.google-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--white); border: 1px solid var(--border); padding: 12px;
+  font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--stone); cursor: pointer; border-radius: 2px; transition: border-color .2s;
+}
+.google-btn:hover { border-color: var(--gold); }
+.mode-switch { margin-top: 28px; text-align: center; font-size: 13px; color: var(--stone); }
+.mode-switch a { color: var(--gold); font-weight: 500; cursor: pointer; }
+
+/* ════════════════════════════════════════
+   COURSE CATALOG
+════════════════════════════════════════ */
+.catalog-hero { background: var(--blush); padding: 72px 64px 48px; }
+.catalog-hero .eyebrow { margin-bottom: 12px; }
+.catalog-hero h1 { font-size: 52px; font-weight: 300; margin-bottom: 14px; }
+.catalog-hero p { font-size: 15px; color: var(--stone); max-width: 560px; }
+
+.filter-row { display: flex; gap: 8px; padding: 0 64px 40px; }
+.filter-btn {
+  font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  padding: 8px 20px; border: 1px solid var(--border); background: var(--white); color: var(--stone);
+  cursor: pointer; border-radius: 2px; transition: all .2s;
+}
+.filter-btn.active { background: var(--maroon); color: var(--parchment); border-color: var(--maroon); }
+.filter-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+
+.catalog-section { padding: 0 64px 64px; }
+.catalog-section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 28px; }
+.catalog-section-header h2 { font-size: 30px; font-weight: 300; }
+.catalog-section-header span { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--stone); }
+
+.course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.course-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+
+.course-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 2px;
+  overflow: hidden; transition: box-shadow .25s; cursor: pointer;
+}
+.course-card:hover { box-shadow: 0 8px 32px rgba(45,21,16,.1); }
+.card-img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #3a2018 0%, #6b3a28 100%);
+  display: flex; align-items: flex-end;
+}
+.card-img-wrap { position: relative; }
+.card-img-wrap img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.card-img-overlay { position: absolute; inset: 0; background: rgba(28,8,5,.2); }
+.card-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--gold); color: var(--white);
+  font-size: 9px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px;
+}
+.card-type {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(28,8,5,.6); color: var(--parchment);
+  font-size: 9px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px;
+}
+.card-body { padding: 18px 20px; }
+.card-body .eyebrow { font-size: 9px; margin-bottom: 6px; }
+.card-body h3 { font-size: 19px; font-weight: 300; margin-bottom: 6px; line-height: 1.3; transition: color .2s; }
+.course-card:hover .card-body h3 { color: var(--gold); }
+.card-body .tagline { font-size: 13px; color: var(--stone); margin-bottom: 12px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card-meta { display: flex; gap: 14px; font-size: 11px; color: rgba(92,61,53,.7); margin-bottom: 14px; }
+.card-meta span { display: flex; align-items: center; gap: 4px; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--border); }
+.card-price { font-family: var(--serif); font-size: 22px; font-weight: 300; }
+.card-price s { font-size: 14px; color: var(--stone); opacity: .5; margin-left: 6px; font-family: var(--sans); font-weight: 300; }
+.card-cta { font-size: 9px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+
+/* Enrolled state */
+.card-enrolled-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 9px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold); padding: 4px 10px;
+  background: rgba(184,136,42,.1); border: 1px solid rgba(184,136,42,.25);
+  border-radius: 2px;
+}
+.card-progress-wrap { margin: 12px 0 14px; }
+.card-progress-label { display: flex; justify-content: space-between; font-size: 10px; color: var(--stone); margin-bottom: 5px; }
+.card-progress-bar { height: 3px; background: var(--border); border-radius: 2px; }
+.card-progress-fill { height: 3px; background: var(--gold); border-radius: 2px; }
+.card-cta-resume { font-size: 9px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+
+/* Locked state */
+.course-card.locked { opacity: 1; }
+.course-card.locked .card-img-wrap { position: relative; }
+.lock-overlay {
+  position: absolute; inset: 0;
+  background: rgba(28,8,5,.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+}
+.lock-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(28,8,5,.7); border: 1px solid rgba(184,136,42,.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.card-cta-enroll {
+  display: inline-flex; align-items: center; gap-6px;
+  font-size: 9px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: white; background: var(--gold); padding: 7px 14px; border-radius: 2px;
+  cursor: pointer;
+}
+
+/* ════════════════════════════════════════
+   COURSE DETAIL PAGE
+════════════════════════════════════════ */
+.course-hero {
+  background: var(--dark); padding: 40px 64px 48px;
+  display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: center;
+}
+.course-hero .eyebrow { color: rgba(184,136,42,.85); margin-bottom: 12px; }
+.course-hero h1 { font-size: 46px; font-weight: 300; color: var(--parchment); line-height: 1.15; margin-bottom: 12px; }
+.course-hero .tagline { font-size: 16px; color: rgba(232,208,184,.7); margin-bottom: 24px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
+.hero-meta span { font-size: 12px; color: rgba(232,208,184,.55); display: flex; align-items: center; gap: 6px; }
+.course-hero .instructor { font-size: 13px; color: rgba(232,208,184,.45); }
+.course-hero .instructor strong { color: var(--parchment); }
+.hero-badge { display: inline-block; background: var(--gold); color: var(--white); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 16px; }
+
+.hero-img-wrap { position: relative; border-radius: 2px; overflow: hidden; aspect-ratio: 4/3; }
+.hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.hero-img-overlay { position: absolute; inset: 0; background: rgba(28,8,5,.35); display: flex; align-items: center; justify-content: center; }
+.play-btn { width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,.2); border: 1.5px solid rgba(255,255,255,.45); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s; }
+.play-btn:hover { background: rgba(255,255,255,.3); }
+.play-btn svg { margin-left: 4px; }
+
+.course-body { padding: 0 64px 64px; max-width: 860px; margin-top: 48px; }
+.module-resources { padding: 12px 18px 14px; background: rgba(245,232,220,.45); border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px; }
+.resource-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 500; letter-spacing: .08em;
+  color: var(--stone); background: var(--white);
+  border: 1px solid var(--border); border-radius: 2px;
+  padding: 5px 11px; cursor: pointer; transition: border-color .15s, color .15s;
+}
+.resource-pill:hover { border-color: var(--gold); color: var(--gold); }
+
+.section-title { font-size: 30px; font-weight: 300; margin-bottom: 24px; }
+.outcomes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 48px; }
+.outcome-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--stone); }
+.outcome-check { color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+
+.about-text p { font-size: 14px; color: var(--stone); line-height: 1.8; margin-bottom: 16px; }
+
+.curriculum-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.curriculum-count { font-size: 12px; color: var(--stone); }
+.module-block { border: 1px solid var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 10px; }
+.module-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--blush); cursor: pointer; }
+.module-head span { font-size: 13px; font-weight: 500; color: var(--maroon); }
+.module-head small { font-size: 11px; color: var(--stone); }
+.lesson-row { display: flex; align-items: center; gap: 12px; padding: 11px 18px; border-top: 1px solid var(--border); background: var(--white); }
+.lesson-icon { color: var(--stone); opacity: .4; flex-shrink: 0; }
+.lesson-icon.preview { color: var(--gold); opacity: 1; }
+.lesson-info { flex: 1; }
+.lesson-title { font-size: 13px; color: var(--maroon); }
+.lesson-preview { font-size: 10px; color: var(--gold); letter-spacing: .06em; }
+.lesson-dur { font-size: 11px; color: var(--stone); opacity: .7; }
+
+/* Purchase card */
+.purchase-card { background: var(--white); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; position: sticky; top: 120px; }
+.purchase-img { width: 100%; height: 140px; object-fit: cover; display: block; position: relative; }
+.purchase-img-wrap { position: relative; }
+.purchase-img-wrap img { width: 100%; height: 140px; object-fit: cover; display: block; }
+.purchase-img-wrap::after { content: ''; position: absolute; inset: 0; background: rgba(28,8,5,.3); }
+.purchase-body { padding: 22px; }
+.purchase-price { font-family: var(--serif); font-size: 42px; font-weight: 300; color: var(--maroon); }
+.purchase-price s { font-size: 18px; font-family: var(--sans); font-weight: 300; color: var(--stone); opacity: .5; margin-left: 6px; }
+.purchase-save { font-size: 11px; color: var(--gold); margin-bottom: 20px; }
+.purchase-cta { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.purchase-cta .btn-gold { justify-content: center; }
+.purchase-cta .btn-outline { justify-content: center; }
+.purchase-guarantees { display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid var(--border); }
+.guarantee-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--stone); }
+.guarantee-icon { color: var(--gold); flex-shrink: 0; }
+.installments { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--stone); }
+.installments span { color: var(--gold); font-weight: 500; }
+
+/* ════════════════════════════════════════
+   DASHBOARD
+════════════════════════════════════════ */
+.dashboard-wrap { padding: 56px 64px; max-width: 1100px; margin: 0 auto; }
+.dashboard-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 40px; }
+.dashboard-header .eyebrow { margin-bottom: 8px; }
+.dashboard-header h1 { font-size: 38px; font-weight: 300; }
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+.stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 2px; padding: 22px; text-align: center; }
+.stat-icon { color: var(--gold); margin: 0 auto 8px; }
+.stat-value { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--maroon); }
+.stat-label { font-size: 11px; color: var(--stone); letter-spacing: .06em; margin-top: 2px; }
+
+.section-head-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.section-head-row h2 { font-size: 24px; font-weight: 300; }
+.enrolled-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 48px; }
+.enrolled-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 2px;
+  display: flex; overflow: hidden;
+}
+.enrolled-thumb { width: 200px; flex-shrink: 0; position: relative; }
+.enrolled-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.enrolled-thumb-overlay { position: absolute; inset: 0; background: rgba(28,8,5,.35); display: flex; align-items: center; justify-content: center; }
+.enrolled-play { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.25); border: 1.5px solid rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.enrolled-info { padding: 20px 24px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.enrolled-info h3 { font-size: 20px; font-weight: 300; margin-bottom: 4px; }
+.enrolled-last { font-size: 12px; color: var(--stone); margin-bottom: 12px; }
+.enrolled-last strong { color: var(--maroon); font-weight: 400; }
+.enrolled-footer { display: flex; align-items: center; justify-content: space-between; }
+.enrolled-date { font-size: 11px; color: var(--stone); }
+.enrolled-pct { font-size: 13px; font-weight: 500; color: var(--gold); }
+.progress-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 6px; }
+.progress-fill { height: 100%; background: var(--gold); border-radius: 2px; }
+
+.explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.mini-card { background: var(--white); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; cursor: pointer; transition: box-shadow .2s; }
+.mini-card:hover { box-shadow: 0 4px 20px rgba(45,21,16,.08); }
+.mini-card img { width: 100%; height: 130px; object-fit: cover; display: block; }
+.mini-card-body { padding: 14px 16px; }
+.mini-card-body h4 { font-size: 16px; font-weight: 300; margin-bottom: 4px; line-height: 1.3; }
+.mini-card-body p { font-size: 12px; color: var(--stone); margin-bottom: 10px; }
+.mini-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.mini-price { font-family: var(--serif); font-size: 18px; font-weight: 300; }
+.mini-cta { font-size: 10px; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; }
+
+/* ════════════════════════════════════════
+   LESSON PLAYER
+════════════════════════════════════════ */
+.player-wrap { height: calc(100vh - 44px); display: flex; flex-direction: column; overflow: hidden; background: var(--blush); }
+.player-topbar {
+  background: var(--dark); height: 52px; display: flex; align-items: center;
+  padding: 0 20px; gap: 16px; flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.player-topbar .back-link { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,208,184,.5); display: flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap; }
+.player-topbar .back-link:hover { color: var(--parchment); }
+.player-topbar .course-name { font-size: 13px; color: rgba(232,208,184,.65); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player-progress { display: flex; align-items: center; gap: 10px; }
+.player-progress-bar { width: 120px; height: 3px; background: rgba(255,255,255,.12); border-radius: 2px; overflow: hidden; }
+.player-progress-fill { height: 100%; background: var(--gold); border-radius: 2px; }
+.player-progress-pct { font-size: 11px; color: rgba(232,208,184,.4); }
+.curriculum-toggle { display: flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,208,184,.5); cursor: pointer; white-space: nowrap; padding-left: 12px; border-left: 1px solid rgba(255,255,255,.08); }
+.curriculum-toggle:hover { color: var(--parchment); }
+
+.player-body { display: flex; flex: 1; overflow: hidden; }
+.player-main { flex: 1; overflow-y: auto; }
+.video-area {
+  width: 100%; aspect-ratio: 16/9; max-height: 52vh;
+  background: var(--dark); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.video-inner { text-align: center; }
+.video-play { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1.5px solid rgba(255,255,255,.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; cursor: pointer; transition: background .2s; }
+.video-play:hover { background: rgba(255,255,255,.22); }
+.video-title { font-size: 14px; color: rgba(232,208,184,.6); }
+.video-dur { font-size: 12px; color: rgba(232,208,184,.35); margin-top: 4px; }
+
+.lesson-content { max-width: 720px; margin: 0 auto; padding: 32px 32px 48px; }
+.lesson-content-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.lesson-module-label { font-size: 11px; color: var(--stone); margin-bottom: 4px; }
+.lesson-content-top h2 { font-size: 28px; font-weight: 300; }
+.complete-btn {
+  display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+  font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  padding: 8px 16px; border: 1px solid var(--border); background: var(--white);
+  color: var(--stone); border-radius: 2px; cursor: pointer; transition: all .2s;
+}
+.complete-btn.done { background: #F0F7F0; border-color: #A8C8A8; color: #2D5A2D; }
+.complete-btn:hover:not(.done) { border-color: var(--gold); color: var(--gold); }
+.prev-next { display: flex; gap: 10px; margin-bottom: 32px; }
+
+.lesson-tab-row { border-bottom: 1px solid var(--border); display: flex; gap: 24px; margin-bottom: 24px; }
+.lesson-tab { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--stone); padding-bottom: 12px; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; }
+.lesson-tab.active { color: var(--maroon); border-color: var(--gold); }
+.lesson-notes { font-size: 14px; color: var(--stone); line-height: 1.8; }
+.lesson-notes-box { background: var(--gold-dim); border: 1px solid rgba(184,136,42,.2); border-radius: 2px; padding: 16px; margin-top: 16px; }
+.lesson-notes-box p { font-size: 13px; color: var(--maroon); margin-bottom: 4px; font-weight: 500; }
+.lesson-notes-box small { font-size: 12px; color: var(--stone); }
+.lesson-resources-panel { display: none; }
+.lesson-resources-panel.active { display: block; }
+.lesson-resources-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--stone); margin-bottom: 14px; }
+.lesson-resource-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border: 1px solid var(--border); border-radius: 2px;
+  margin-bottom: 8px; background: var(--white); transition: border-color .15s;
+}
+.lesson-resource-row:hover { border-color: var(--gold); }
+.lesson-resource-left { display: flex; align-items: center; gap: 12px; }
+.lesson-resource-icon { width: 36px; height: 36px; background: rgba(245,232,220,.7); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.lesson-resource-name { font-size: 13px; font-weight: 500; color: var(--maroon); margin-bottom: 2px; }
+.lesson-resource-meta { font-size: 11px; color: var(--stone); }
+.lesson-resource-dl { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 500; cursor: pointer; }
+
+/* Sidebar */
+.player-sidebar { width: 300px; border-left: 1px solid var(--border); background: var(--white); display: flex; flex-direction: column; flex-shrink: 0; overflow: hidden; }
+.sidebar-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; background: var(--white); }
+.sidebar-head p { font-size: 12px; font-weight: 500; color: var(--maroon); }
+.sidebar-progress-mini { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+.sidebar-progress-row { display: flex; justify-content: space-between; font-size: 11px; color: var(--stone); margin-bottom: 6px; }
+.sidebar-list { flex: 1; overflow-y: auto; }
+.sidebar-module-head { padding: 10px 14px; background: var(--blush); border-bottom: 1px solid var(--border); }
+.sidebar-module-head p { font-size: 11px; font-weight: 500; color: var(--maroon); }
+.sidebar-lesson { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s; }
+.sidebar-lesson:hover { background: var(--blush); }
+.sidebar-lesson.current { background: var(--gold-dim); border-left: 2px solid var(--gold); }
+.sl-icon { flex-shrink: 0; }
+.sl-title { font-size: 12px; color: var(--stone); flex: 1; line-height: 1.4; }
+.sidebar-lesson.current .sl-title { color: var(--maroon); font-weight: 500; }
+.sl-dur { font-size: 10px; color: rgba(92,61,53,.5); }
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .login-left { display: none; }
+  .course-hero { grid-template-columns: 1fr; }
+  .hero-img-wrap { display: none; }
+  .course-body { grid-template-columns: 1fr; }
+  .purchase-card { position: static; }
+  .course-grid { grid-template-columns: 1fr 1fr; }
+  .player-sidebar { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ── Mockup page switcher ── -->
+<div class="mockup-bar">
+  <span>SYB Portal</span>
+  <button class="mockup-btn active" onclick="showPage('login')">Login</button>
+  <button class="mockup-btn" onclick="showPage('catalog')">Course Catalog</button>
+  <button class="mockup-btn" onclick="showPage('course')">Course Detail</button>
+  <button class="mockup-btn" onclick="showPage('dashboard')">Dashboard</button>
+  <button class="mockup-btn" onclick="showPage('player')">Lesson Player</button>
+</div>
+
+<div class="page-wrap">
+
+<!-- ════════════════════════════════════════
+     LOGIN
+════════════════════════════════════════ -->
+<div id="page-login" class="page active">
+  <!-- No site nav on login — full screen layout -->
+  <div class="login-wrap">
+    <!-- Left -->
+    <div class="login-left">
+      <div class="ll-logo">Sell Your Brilliance</div>
+
+      <div class="ll-testimonial">
+        <div class="ll-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <blockquote>
+          "Michele's Voice & Message course gave me the clarity I'd been searching for for years. I finally know what I stand for — and more importantly, how to say it."
+        </blockquote>
+        <div class="ll-author">
+          <div class="ll-avatar">SK</div>
+          <div class="ll-author-info">
+            <div class="ll-name">Sarah K.</div>
+            <div class="ll-role">Executive Coach</div>
+          </div>
+        </div>
+        <div class="ll-course-tag">
+          <span class="tag-label">Enrolled in</span>
+          <span class="tag-course">Channel Your Speaking Voice</span>
+        </div>
+      </div>
+
+      <p class="ll-footer">© 2026 Sell Your Brilliance</p>
+    </div>
+    <!-- Right -->
+    <div class="login-right">
+      <div class="login-form-wrap">
+        <p class="eyebrow">Member Access</p>
+        <h1>Welcome back.</h1>
+        <p class="subtitle">Sign in to access your courses.</p>
+
+        <div class="form-group">
+          <label class="field-label">Email Address</label>
+          <input type="email" class="field" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <div class="form-row">
+            <label class="field-label" style="margin-bottom:0">Password</label>
+            <a class="forgot">Forgot password?</a>
+          </div>
+          <input type="password" class="field" value="••••••••" style="margin-top:6px" />
+        </div>
+
+        <div class="form-submit">
+          <button class="btn-gold" style="width:100%;justify-content:center">
+            Sign In &nbsp;→
+          </button>
+        </div>
+
+        <div class="divider"><span>or</span></div>
+
+        <button class="google-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div class="mode-switch">
+          Don't have an account? <a onclick="showSignup()">Sign up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     COURSE CATALOG
+════════════════════════════════════════ -->
+<div id="page-catalog" class="page">
+  <nav class="site-nav">
+    <span class="logo">Sell Your Brilliance</span>
+    <div class="nav-right">
+      <span class="sign-in" style="color:var(--stone)">Michele P.</span>
+      <button class="btn-gold" style="padding:9px 20px;font-size:10px">My Dashboard</button>
+    </div>
+  </nav>
+
+  <div class="catalog-hero">
+    <p class="eyebrow">My Courses</p>
+    <h1>Your learning library.</h1>
+    <p>Courses you've enrolled in are ready to continue. Unlock more to expand your brilliance.</p>
+  </div>
+
+  <div class="catalog-section">
+    <div class="catalog-section-header">
+      <h2>All Courses</h2>
+      <span>3 Courses</span>
+    </div>
+    <div class="course-grid">
+
+      <!-- Card 1 — ENROLLED -->
+      <div class="course-card">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt="" />
+          <div class="card-img-overlay"></div>
+          <span class="card-badge">Most Popular</span>
+          <span class="card-type">Course</span>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <p class="eyebrow" style="margin-bottom:0">All Levels</p>
+            <span class="card-enrolled-badge">✓ Enrolled</span>
+          </div>
+          <h3>Channel Your Speaking Voice</h3>
+          <p class="tagline">Activate the voice that commands a room and a movement.</p>
+          <div class="card-progress-wrap">
+            <div class="card-progress-label">
+              <span>Progress</span>
+              <span>68%</span>
+            </div>
+            <div class="card-progress-bar"><div class="card-progress-fill" style="width:68%"></div></div>
+          </div>
+          <div class="card-footer">
+            <span style="font-size:11px;color:var(--stone)">Last: Anatomy of a Magnetic Message</span>
+            <span class="card-cta-resume">Continue →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 — LOCKED -->
+      <div class="course-card locked">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1587691592099-24045742c181?w=600&q=80" alt="" />
+          <div class="card-img-overlay"></div>
+          <div class="lock-overlay">
+            <div class="lock-icon">🔒</div>
+          </div>
+          <span class="card-badge">New</span>
+          <span class="card-type">Course</span>
+        </div>
+        <div class="card-body">
+          <p class="eyebrow">All Levels</p>
+          <h3>Channel Your Writing Voice</h3>
+          <p class="tagline">Write with the authority that makes your words impossible to ignore.</p>
+          <div class="card-meta">
+            <span>⏱ 6 weeks</span>
+            <span>📖 28 lessons</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">$197</div>
+            <span class="card-cta-enroll">Enroll →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 — LOCKED -->
+      <div class="course-card locked">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80" alt="" />
+          <div class="card-img-overlay"></div>
+          <div class="lock-overlay">
+            <div class="lock-icon">🔒</div>
+          </div>
+          <span class="card-type">Course</span>
+        </div>
+        <div class="card-body">
+          <p class="eyebrow">All Levels</p>
+          <h3>Sell Your Brilliance Book Companion Transmissions</h3>
+          <p class="tagline">Go deeper into the book — transmission by transmission.</p>
+          <div class="card-meta">
+            <span>⏱ Self-paced</span>
+            <span>📖 24 lessons</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">$297</div>
+            <span class="card-cta-enroll">Enroll →</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+
+    <!-- Bottom CTA -->
+    <div style="margin-top:56px;background:var(--dark);border-radius:2px;padding:56px 64px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center">
+      <div>
+        <p class="eyebrow" style="color:rgba(184,136,42,.7);margin-bottom:12px">Want to go deeper?</p>
+        <h3 style="font-size:32px;font-weight:300;color:var(--parchment);margin-bottom:12px;line-height:1.3">Continue your transformation in person.<br>Join one of our upcoming retreats.</h3>
+        <p style="font-size:14px;color:rgba(232,208,184,.45);max-width:480px;line-height:1.7">Small group, immersive experiences in Hawaii and Santa Fe — where the work you've started in these courses becomes a fully embodied reality.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0">
+        <button class="btn-gold" style="white-space:nowrap">View Upcoming Retreats &nbsp;→</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     COURSE DETAIL
+════════════════════════════════════════ -->
+<div id="page-course" class="page">
+  <nav class="site-nav">
+    <span class="logo">Sell Your Brilliance</span>
+    <div class="nav-right">
+      <span class="sign-in" style="color:var(--stone)">Michele P.</span>
+      <button class="btn-gold" style="padding:9px 20px;font-size:10px">My Dashboard</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="course-hero">
+    <div>
+      <span class="hero-badge">Most Popular</span>
+      <p class="eyebrow">Online Course · All Levels</p>
+      <h1>Channel Your Speaking Voice</h1>
+      <p class="tagline">Activate the voice that commands a room and a movement.</p>
+      <div class="hero-meta">
+        <span>⏱ 6 weeks</span>
+        <span>📖 32 lessons</span>
+        <span>👤 1,240 enrolled</span>
+        <span>⭐ 4.9 rating</span>
+      </div>
+      <p class="instructor">Taught by <strong>Michele Parad</strong></p>
+    </div>
+    <div class="hero-img-wrap">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=700&q=80" alt="" />
+      <div class="hero-img-overlay">
+        <div class="play-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="course-body">
+    <div>
+      <!-- About -->
+      <h2 class="section-title">About this course</h2>
+      <div class="about-text">
+        <p>Your speaking voice is more than how you sound. It's the energetic signature you carry into every room, every stage, every conversation. This course helps you excavate it, own it, and amplify it.</p>
+        <p>You'll leave with a fully activated speaking voice, a clear point of view you can articulate in seconds, and the presence to hold any room — from a podcast mic to a stadium stage.</p>
+      </div>
+
+      <!-- Curriculum -->
+      <div class="curriculum-header" style="margin-top:40px">
+        <h2 class="section-title" style="margin-bottom:0">Curriculum</h2>
+        <span class="curriculum-count">3 modules · 11 lessons</span>
+      </div>
+
+      <div class="module-block">
+        <div class="module-head">
+          <span>Module 1 — The Identity Excavation</span>
+          <small>4 lessons</small>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon preview">▶</span>
+          <div class="lesson-info">
+            <div class="lesson-title">Welcome &amp; Orientation <span class="lesson-preview">Preview</span></div>
+          </div>
+          <span class="lesson-dur">8 min</span>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon preview">▶</span>
+          <div class="lesson-info">
+            <div class="lesson-title">Your Brilliance Baseline <span class="lesson-preview">Preview</span></div>
+          </div>
+          <span class="lesson-dur">22 min</span>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">The Hummingbird Brain Advantage</div></div>
+          <span class="lesson-dur">18 min</span>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">Identity Audit Exercise</div></div>
+          <span class="lesson-dur">30 min</span>
+        </div>
+        <div class="module-resources">
+          <span class="resource-pill">📄 Module Workbook</span>
+          <span class="resource-pill">🎧 Audio Version</span>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="module-head">
+          <span>Module 2 — Voice Architecture</span>
+          <small>4 lessons</small>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">Anatomy of a Magnetic Message</div></div>
+          <span class="lesson-dur">25 min</span>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">The S.E.L.L. Framework Deep Dive</div></div>
+          <span class="lesson-dur">35 min</span>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">Craft Your Positioning Statement</div></div>
+          <span class="lesson-dur">20 min</span>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">Message Testing &amp; Refinement</div></div>
+          <span class="lesson-dur">15 min</span>
+        </div>
+        <div class="module-resources">
+          <span class="resource-pill">📄 S.E.L.L. Framework PDF</span>
+          <span class="resource-pill">✏️ Positioning Statement Template</span>
+          <span class="resource-pill">🎧 Audio Version</span>
+        </div>
+      </div>
+
+      <div class="module-block">
+        <div class="module-head">
+          <span>Module 3 — Presence &amp; Activation</span>
+          <small>3 lessons</small>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">Voice vs. Tone: Knowing the Difference</div></div>
+          <span class="lesson-dur">18 min</span>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">Building Your Language Ecosystem</div></div>
+          <span class="lesson-dur">28 min</span>
+        </div>
+        <div class="lesson-row">
+          <span class="lesson-icon">🔒</span>
+          <div class="lesson-info"><div class="lesson-title">Speaking Across Platforms</div></div>
+          <span class="lesson-dur">22 min</span>
+        </div>
+        <div class="module-resources">
+          <span class="resource-pill">📄 Language Ecosystem Worksheet</span>
+          <span class="resource-pill">🎧 Audio Version</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div style="height:80px"></div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     DASHBOARD
+════════════════════════════════════════ -->
+<div id="page-dashboard" class="page">
+  <nav class="site-nav">
+    <span class="logo">Sell Your Brilliance</span>
+    <div class="nav-right">
+      <span class="sign-in" style="color:var(--stone)">Michele P.</span>
+      <button class="btn-gold" style="padding:9px 20px;font-size:10px">My Courses</button>
+    </div>
+  </nav>
+
+  <div class="dashboard-wrap">
+    <div class="dashboard-header">
+      <div>
+        <p class="eyebrow">Welcome back</p>
+        <h1>Your learning journey</h1>
+      </div>
+      <button class="btn-outline">Browse more courses →</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-value">2</div>
+        <div class="stat-label">Enrolled</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱</div>
+        <div class="stat-value">18h</div>
+        <div class="stat-label">Hours Learned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-value">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+    </div>
+
+    <!-- Enrolled courses -->
+    <div class="section-head-row">
+      <h2>Continue learning</h2>
+    </div>
+    <div class="enrolled-list">
+
+      <div class="enrolled-card">
+        <div class="enrolled-thumb">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&q=80" alt="" />
+          <div class="enrolled-thumb-overlay">
+            <div class="enrolled-play">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="enrolled-info">
+          <div>
+            <h3>Channel Your Speaking Voice</h3>
+            <p class="enrolled-last">Last watched: <strong>Anatomy of a Magnetic Message</strong></p>
+          </div>
+          <div>
+            <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+            <div class="enrolled-footer">
+              <span class="enrolled-date">Enrolled Nov 15, 2024</span>
+              <span class="enrolled-pct">68% complete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="enrolled-card">
+        <div class="enrolled-thumb">
+          <img src="https://images.unsplash.com/photo-1587691592099-24045742c181?w=400&q=80" alt="" />
+          <div class="enrolled-thumb-overlay">
+            <div class="enrolled-play">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="enrolled-info">
+          <div>
+            <h3>Sell Your Brilliance Book Companion Transmissions</h3>
+            <p class="enrolled-last">Last watched: <strong>Chapter 2: Excavating Your Brilliance</strong></p>
+          </div>
+          <div>
+            <div class="progress-bar"><div class="progress-fill" style="width:22%"></div></div>
+            <div class="enrolled-footer">
+              <span class="enrolled-date">Enrolled Jan 8, 2025</span>
+              <span class="enrolled-pct">22% complete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Explore more -->
+    <div class="section-head-row" style="margin-top:8px">
+      <h2>Explore more courses</h2>
+      <a style="font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase">View all →</a>
+    </div>
+    <div class="explore-grid">
+      <div class="mini-card">
+        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400&q=80" alt="" />
+        <div class="mini-card-body">
+          <h4>Channel Your Writing Voice</h4>
+          <p>Write with the authority that makes your words impossible to ignore.</p>
+          <div class="mini-card-footer">
+            <span class="mini-price">$197</span>
+            <span class="mini-cta">Enroll →</span>
+          </div>
+        </div>
+      </div>
+      <div class="mini-card">
+        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400&q=80" alt="" />
+        <div class="mini-card-body">
+          <h4>Book Companion Transmissions</h4>
+          <p>Go deeper into the Sell Your Brilliance book, lesson by lesson.</p>
+          <div class="mini-card-footer">
+            <span class="mini-price">$297</span>
+            <span class="mini-cta">Enroll →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     LESSON PLAYER
+════════════════════════════════════════ -->
+<div id="page-player" class="page">
+  <div class="player-wrap">
+    <!-- Top bar -->
+    <div class="player-topbar">
+      <span class="back-link">← Back to course</span>
+      <span class="player-course-name">Channel Your Speaking Voice</span>
+      <div class="player-progress">
+        <div class="player-progress-bar"><div class="player-progress-fill" style="width:68%"></div></div>
+        <span class="player-progress-pct">68%</span>
+      </div>
+      <span class="curriculum-toggle">☰ Curriculum</span>
+    </div>
+
+    <div class="player-body">
+      <!-- Main content -->
+      <div class="player-main">
+        <!-- Video -->
+        <div class="video-area">
+          <div class="video-inner">
+            <div class="video-play">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <p class="video-title">Anatomy of a Magnetic Message</p>
+            <p class="video-dur">25 min</p>
+          </div>
+        </div>
+
+        <!-- Lesson content area -->
+        <div class="lesson-content">
+          <div class="lesson-content-top">
+            <div>
+              <p class="lesson-module-label">Module 2 — Signature Message Architecture</p>
+              <h2>Anatomy of a Magnetic Message</h2>
+            </div>
+            <button class="complete-btn">○ Mark Complete</button>
+          </div>
+
+          <!-- Prev/Next -->
+          <div class="prev-next">
+            <button class="btn-outline" style="padding:10px 20px;font-size:10px">← Previous</button>
+            <button class="btn-gold" style="padding:10px 20px;font-size:10px;margin-left:auto">Next →</button>
+          </div>
+
+          <!-- Tabs -->
+          <div class="lesson-tab-row">
+            <span class="lesson-tab active" onclick="switchTab('notes', this)">📖 Notes</span>
+            <span class="lesson-tab" onclick="switchTab('transcript', this)">💬 Transcript</span>
+            <span class="lesson-tab" onclick="switchTab('resources', this)">📎 Resources</span>
+          </div>
+
+          <div id="tab-notes" class="lesson-notes">
+            <p>Deconstruct what makes messages stick and spread. In this lesson we break down the exact anatomy of the messages that magnetize ideal clients — and what separates them from the ones that disappear into the noise.</p>
+          </div>
+
+          <div id="tab-transcript" class="lesson-notes" style="display:none">
+            <p style="font-style:italic;color:var(--stone);opacity:.6">Transcript is being processed and will appear here shortly.</p>
+          </div>
+
+          <div id="tab-resources" class="lesson-resources-panel">
+            <p class="lesson-resources-label">Module 2 Resources</p>
+
+            <div class="lesson-resource-row">
+              <div class="lesson-resource-left">
+                <div class="lesson-resource-icon">📄</div>
+                <div>
+                  <div class="lesson-resource-name">S.E.L.L. Framework PDF</div>
+                  <div class="lesson-resource-meta">PDF · 4 pages</div>
+                </div>
+              </div>
+              <span class="lesson-resource-dl">Download ↓</span>
+            </div>
+
+            <div class="lesson-resource-row">
+              <div class="lesson-resource-left">
+                <div class="lesson-resource-icon">✏️</div>
+                <div>
+                  <div class="lesson-resource-name">Positioning Statement Template</div>
+                  <div class="lesson-resource-meta">PDF · 2 pages</div>
+                </div>
+              </div>
+              <span class="lesson-resource-dl">Download ↓</span>
+            </div>
+
+            <div class="lesson-resource-row">
+              <div class="lesson-resource-left">
+                <div class="lesson-resource-icon">🎧</div>
+                <div>
+                  <div class="lesson-resource-name">Audio Version — Module 2</div>
+                  <div class="lesson-resource-meta">MP3 · 93 min</div>
+                </div>
+              </div>
+              <span class="lesson-resource-dl">Download ↓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="player-sidebar">
+        <div class="sidebar-head">
+          <p>Course Content</p>
+          <span style="font-size:16px;color:var(--stone);cursor:pointer">✕</span>
+        </div>
+        <div class="sidebar-progress-mini">
+          <div class="sidebar-progress-row"><span>7 / 11 lessons</span><span>68%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+        </div>
+        <div class="sidebar-list">
+
+          <div class="sidebar-module-head"><p>Module 1 — The Identity Excavation</p></div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--gold)">✓</span>
+            <span class="sl-title">Welcome &amp; Orientation</span>
+            <span class="sl-dur">8m</span>
+          </div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--gold)">✓</span>
+            <span class="sl-title">Your Brilliance Baseline</span>
+            <span class="sl-dur">22m</span>
+          </div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--stone);opacity:.35">○</span>
+            <span class="sl-title">The Hummingbird Brain Advantage</span>
+            <span class="sl-dur">18m</span>
+          </div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--stone);opacity:.35">○</span>
+            <span class="sl-title">Identity Audit Exercise</span>
+            <span class="sl-dur">30m</span>
+          </div>
+
+          <div class="sidebar-module-head"><p>Module 2 — Signature Message Architecture</p></div>
+          <div class="sidebar-lesson current">
+            <span class="sl-icon" style="color:var(--stone);opacity:.35">○</span>
+            <span class="sl-title">Anatomy of a Magnetic Message</span>
+            <span class="sl-dur">25m</span>
+          </div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--stone);opacity:.2">🔒</span>
+            <span class="sl-title">The S.E.L.L. Framework</span>
+            <span class="sl-dur">35m</span>
+          </div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--stone);opacity:.2">🔒</span>
+            <span class="sl-title">Craft Your Positioning Statement</span>
+            <span class="sl-dur">20m</span>
+          </div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--stone);opacity:.2">🔒</span>
+            <span class="sl-title">Message Testing &amp; Refinement</span>
+            <span class="sl-dur">15m</span>
+          </div>
+
+          <div class="sidebar-module-head"><p>Module 3 — Voice Activation</p></div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--stone);opacity:.2">🔒</span>
+            <span class="sl-title">Voice vs. Tone</span>
+            <span class="sl-dur">18m</span>
+          </div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--stone);opacity:.2">🔒</span>
+            <span class="sl-title">Building Your Language Ecosystem</span>
+            <span class="sl-dur">28m</span>
+          </div>
+          <div class="sidebar-lesson">
+            <span class="sl-icon" style="color:var(--stone);opacity:.2">🔒</span>
+            <span class="sl-title">Platform Translation Guide</span>
+            <span class="sl-dur">22m</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page-wrap -->
+
+<script>
+function switchTab(tab, el) {
+  document.querySelectorAll('.lesson-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-notes').style.display = tab === 'notes' ? 'block' : 'none';
+  document.getElementById('tab-transcript').style.display = tab === 'transcript' ? 'block' : 'none';
+  const res = document.getElementById('tab-resources');
+  res.style.display = tab === 'resources' ? 'block' : 'none';
+}
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.mockup-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+function showSignup() {
+  // Simple toggle for demo
+  const h = document.querySelector('#page-login h1');
+  const sub = document.querySelector('#page-login .subtitle');
+  const ey = document.querySelector('#page-login .eyebrow');
+  const btn = document.querySelector('#page-login .form-submit .btn-gold');
+  const sw = document.querySelector('.mode-switch');
+  if (h.textContent === 'Welcome back.') {
+    h.textContent = 'Create your account.';
+    sub.textContent = 'Join thousands of brilliant experts already enrolled.';
+    ey.textContent = 'Join Us';
+    btn.textContent = 'Create Account →';
+    sw.innerHTML = 'Already have an account? <a onclick="showSignup()">Sign in</a>';
+  } else {
+    h.textContent = 'Welcome back.';
+    sub.textContent = 'Sign in to access your courses.';
+    ey.textContent = 'Member Access';
+    btn.textContent = 'Sign In →';
+    sw.innerHTML = "Don't have an account? <a onclick=\"showSignup()\">Sign up</a>";
+  }
+}
+</script>
+</body>
+</html>

@@ -2,11 +2,11 @@ import Link from 'next/link'
 
 const links = {
   Programs: [
-    { label: 'Channel Your Voice & Message',      href: '/courses/channel-your-voice' },
-    { label: 'Build Your Signature Course',        href: '/courses/build-your-signature-course' },
-    { label: 'Build Your Virtual Summit',          href: '/courses/build-your-virtual-summit' },
-    { label: 'Hawaii Retreat',                     href: '/courses/voice-activation-retreat-hawaii' },
-    { label: 'Santa Fe Retreat',                   href: '/courses/writing-retreat-santa-fe' },
+    { label: 'Channel Your Speaking Voice',                    href: '/courses/channel-your-speaking-voice' },
+    { label: 'Channel Your Writing Voice',                     href: '/courses/channel-your-writing-voice' },
+    { label: 'Book Companion Transmissions',                   href: '/courses/syb-book-companion-transmissions' },
+    { label: 'Hawaii Retreat',                                 href: '/courses/voice-activation-retreat-hawaii' },
+    { label: 'Santa Fe Retreat',                               href: '/courses/writing-retreat-santa-fe' },
   ],
   Company: [
     { label: 'About Michele',   href: '/#about' },

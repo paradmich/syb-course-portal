@@ -1,28 +1,18 @@
 import { courses } from '@/lib/courses'
 import CourseCard from '@/components/CourseCard'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Lock } from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'All Programs — Sell Your Brilliance',
-  description: 'Courses, retreats, and programs for established experts ready to amplify their voice and impact.',
+  title: 'My Courses — Sell Your Brilliance',
+  description: 'Your learning library. Access enrolled courses and discover new ones.',
 }
 
-export default function CoursesPage({
-  searchParams,
-}: {
-  searchParams: { category?: string }
-}) {
-  const activeCategory: 'all' | 'course' | 'retreat' =
-    searchParams.category === 'retreat' ? 'retreat'
-    : searchParams.category === 'course' ? 'course'
-    : 'all'
-  const filtered = activeCategory === 'all'
-    ? courses
-    : courses.filter(c => c.category === activeCategory)
+// In production this comes from the session/DB. Mocked here for now.
+const enrolledSlugs = ['channel-your-speaking-voice']
 
-  const online = courses.filter(c => c.category === 'course')
-  const retreats = courses.filter(c => c.category === 'retreat')
+export default function CoursesPage() {
+  const allCourses = courses.filter(c => c.category === 'course')
 
   return (
     <div className="pt-28 pb-24 px-6">
@@ -30,81 +20,43 @@ export default function CoursesPage({
 
         {/* Header */}
         <div className="max-w-2xl mb-14">
-          <p className="section-label mb-3">All Programs</p>
+          <p className="section-label mb-3">My Courses</p>
           <h1 className="font-serif text-5xl font-light text-maroon leading-tight mb-4">
-            Choose your path.
+            Your learning library.
           </h1>
           <p className="text-stone text-lg leading-relaxed">
-            Whether you want to find your voice, build your course, or go deep in an immersive retreat — there's a container here for your next evolution.
+            Courses you&apos;ve enrolled in are ready to continue. Unlock more to expand your brilliance.
           </p>
         </div>
 
-        {/* Category filter */}
-        <div className="flex gap-2 mb-12">
-          {(['all', 'course', 'retreat'] as const).map(cat => (
-            <Link
-              key={cat}
-              href={cat === 'all' ? '/courses' : `/courses?category=${cat}`}
-              className={`px-4 py-2 text-sm font-medium rounded transition-colors ${
-                (cat === 'all' && activeCategory === 'all') || cat === activeCategory
-                  ? 'bg-dark text-parchment'
-                  : 'bg-white border border-border text-stone hover:border-ink hover:text-maroon'
-              }`}
-            >
-              {cat === 'all' ? 'All Programs' : cat === 'course' ? 'Online Courses' : 'Retreats'}
+        {/* Course grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+          {allCourses.map(course => {
+            const enrolled = enrolledSlugs.includes(course.slug)
+            return enrolled
+              ? <CourseCard key={course.slug} course={course} enrolled />
+              : <CourseCard key={course.slug} course={course} locked />
+          })}
+        </div>
+
+        {/* Retreat CTA */}
+        <div className="bg-dark rounded-sm p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <p className="section-label mb-3" style={{ color: 'rgba(184,136,42,0.7)' }}>
+              Want to go deeper?
+            </p>
+            <h3 className="font-serif text-3xl font-light text-parchment mb-4 leading-snug">
+              Continue your transformation in person. Join one of our upcoming retreats.
+            </h3>
+            <p className="text-parchment/45 leading-relaxed">
+              Small group, immersive experiences in Hawaii and Santa Fe — where the work you&apos;ve started in these courses becomes a fully embodied reality.
+            </p>
+          </div>
+          <div className="flex md:justify-end">
+            <Link href="/#retreats" className="btn-gold">
+              View Upcoming Retreats <ArrowRight size={16} />
             </Link>
-          ))}
-        </div>
-
-        {/* Online Courses */}
-        {(activeCategory === 'all' || activeCategory === 'course') && (
-          <section className="mb-20">
-            {activeCategory === 'all' && (
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="font-serif text-3xl font-light text-maroon">Online Courses</h2>
-                <span className="section-label">{online.length} programs</span>
-              </div>
-            )}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {(activeCategory === 'all' ? online : filtered).map(course => (
-                <CourseCard key={course.slug} course={course} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Retreats */}
-        {(activeCategory === 'all' || activeCategory === 'retreat') && (
-          <section>
-            {activeCategory === 'all' && (
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <h2 className="font-serif text-3xl font-light text-maroon">Immersive Retreats</h2>
-                  <p className="text-sm text-stone mt-1">Small group, in-person experiences</p>
-                </div>
-                <span className="section-label">{retreats.length} events</span>
-              </div>
-            )}
-            <div className="grid md:grid-cols-2 gap-6">
-              {(activeCategory === 'all' ? retreats : filtered).map(course => (
-                <CourseCard key={course.slug} course={course} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Bundle CTA */}
-        <div className="mt-20 bg-dark rounded-lg p-10 md:p-14 text-center">
-          <p className="section-label mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>Not sure where to start?</p>
-          <h3 className="font-serif text-3xl font-light text-parchment mb-4">
-            Start with Channel Your Voice.
-          </h3>
-          <p className="text-parchment/60 mb-8 max-w-md mx-auto">
-            It's the foundation everything else is built on. Most students take it first — and many say it's the most transformative work they've ever done.
-          </p>
-          <Link href="/courses/channel-your-voice" className="btn-gold">
-            Start Here <ArrowRight size={16} />
-          </Link>
+          </div>
         </div>
 
       </div>
